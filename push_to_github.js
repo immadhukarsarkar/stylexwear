@@ -1,6 +1,7 @@
 const https = require('https');
 const fs = require('fs');
 const path = require('path');
+const crypto = require('crypto');
 
 // Load environment variables from .env
 const envPath = path.join(__dirname, '.env');
@@ -84,7 +85,8 @@ async function syncAll() {
 
   for (let i = 0; i < files.length; i++) {
     const f = files[i];
-    const content = fs.readFileSync(f.full).toString('base64');
+    const rawBuf = fs.readFileSync(f.full);
+    const content = rawBuf.toString('base64');
 
     const check = await makeRequest({
       hostname: 'api.github.com',
@@ -97,12 +99,21 @@ async function syncAll() {
       }
     });
 
+    const localSha = crypto.createHash('sha1')
+      .update(Buffer.concat([Buffer.from(`blob ${rawBuf.length}\0`), rawBuf]))
+      .digest('hex');
+
+    if (check.status === 200 && check.data && check.data.sha === localSha) {
+      console.log(`[${i + 1}/${files.length}] Up to date: ${f.relative}`);
+      continue;
+    }
+
     const body = {
       message: `Auto-sync update: ${f.relative}`,
       content
     };
 
-    if (check.status === 200 && check.data.sha) {
+    if (check.status === 200 && check.data && check.data.sha) {
       body.sha = check.data.sha;
     }
 
@@ -121,7 +132,7 @@ async function syncAll() {
     if (upload.status === 200 || upload.status === 201) {
       console.log(`[${i + 1}/${files.length}] Synced: ${f.relative}`);
     } else {
-      console.error(`[${i + 1}/${files.length}] Failed: ${f.relative}`);
+      console.error(`[${i + 1}/${files.length}] Failed: ${f.relative}`, upload.status, upload.data && upload.data.message);
     }
   }
 
