@@ -308,210 +308,17 @@ const PRODUCTS = [
   }
 ];
 
-// -------------------------------------------------------------
-// Dynamic Streetwear Catalog Generator (Generates 187 extra items)
-// -------------------------------------------------------------
-(() => {
-  const prefixes = [
-    "Cyberpunk", "Tokyo Shift", "Aesthetic", "Retro Wave", "Gothic Grunge", 
-    "Urban Nomad", "Minimalist", "Ghost Tech", "Vintage Club", "Midnight", 
-    "Solar Flare", "Dystopian", "Phantom", "Satori", "Zenith", "Neon Matrix", 
-    "Void Walker", "Spectral", "Kensei", "Aether Shift", "Legacy", "Ruin", 
-    "Distorted", "Astral", "Overdrive", "Neo-Goth", "Chrome", "Onyx", "Pulse", 
-    "Hologram", "Arcade", "Shogun", "Shinobi", "Rebel", "Static", "Rust"
-  ];
-
-  const cores = [
-    "Oversized Tee", "Heavyweight Hoodie", "Cargo Joggers", "Utility Vest", 
-    "Solid Sweatshirt", "Oversized Sweatshirt", "Oversized Polo Shirt", 
-    "Distressed Tee", "Drop Shoulder Tee", "Knit Balaclava", "Signature Tee", 
-    "Boxy Fit Tee", "Fleece Hoodie", "Windbreaker Jacket", "Ribbed Knit Beanie",
-    "Heavy French Terry Crewneck", "Track Joggers", "Zip-Up Hoodie"
-  ];
-
-  const suffixes = [
-    "in Acid-Wash Black", "with Cyber Calligraphy", "in Wine Burgundy", 
-    "in Sandstone Beige", "with Distressed Detailing", "in Pitch Charcoal", 
-    "in Waffle Texture", "in Vintage Indigo", "with Reflective Graphic",
-    "in Off-White Cream", "in Forest Olive", "with Neon Graphics",
-    "in Slate Grey", "with Metallic Print"
-  ];
-
-  const descriptions = [
-    "Premium heavyweight fabric, designed with drop shoulder cuts, crew neck collars, and custom graphics. Made from durable 260 GSM French Terry for a structured, stylish fit.",
-    "Featuring high-definition screenprinting and detailed graphic designs. This streetwear piece is made from breathable cotton lycra spandex, ensuring standard comfort and fit.",
-    "Heavyweight fleece hoodies with drop shoulders and comfortable ribbing. Designed for ultimate warmth and a bold streetwear silhouette. Includes spacious front pouch pockets.",
-    "Minimalist streetwear staple in a premium relaxed fit. Crafted from eco-certified lightweight double-knit cotton yarn, displaying a solid wash finish for versatile styling.",
-    "Distressed utility wear designed for daily city life. Features reinforced dual stitching, multiple utility cargo pocket layers, and an adjustable drawcord waist."
-  ];
-
-  const baseImages = [
-    [
-      "https://rareu.in/cdn/shop/files/ChatGPTImageJun30_2026_03_35_19PM.png?v=1782925560&width=800",
-      "https://rareu.in/cdn/shop/files/ChatGPTImageJun30_2026_03_52_52PM.png?v=1782925650&width=800"
-    ],
-    [
-      "https://rareu.in/cdn/shop/files/ChatGPTImageJun30_2026_04_02_06PM.png?v=1782889202&width=800",
-      "https://rareu.in/cdn/shop/files/ChatGPTImageJun30_2026_04_08_05PM.png?v=1782889202&width=800"
-    ],
-    [
-      "https://rareu.in/cdn/shop/files/ChatGPTImageJun30_2026_04_27_02PM.png?v=1782886275&width=800",
-      "https://rareu.in/cdn/shop/files/ChatGPTImageJun30_2026_04_53_25PM.png?v=1782886275&width=800"
-    ],
-    [
-      "https://rareu.in/cdn/shop/files/ChatGPTImageJun30_2026_05_09_22PM.png?v=1782886418&width=800",
-      "https://rareu.in/cdn/shop/files/ChatGPTImageJun30_2026_05_11_32PM.png?v=1782886418&width=800"
-    ],
-    [
-      "https://rareu.in/cdn/shop/files/ChatGPTImageJun30_2026_05_39_15PM.png?v=1782888938&width=800",
-      "https://rareu.in/cdn/shop/files/ChatGPTImageJun30_2026_05_47_39PM.png?v=1782888938&width=800"
-    ],
-    [
-      "https://rareu.in/cdn/shop/files/ChatGPTImageJun30_2026_07_42_55PM.png?v=1782910063&width=800",
-      "https://rareu.in/cdn/shop/files/ChatGPTImageJun30_2026_07_52_45PM.png?v=1782910062&width=800"
-    ],
-    [
-      "https://rareu.in/cdn/shop/files/ChatGPTImageJul1_2026_04_57_29PM.png?v=1782911597&width=800",
-      "https://rareu.in/cdn/shop/files/ChatGPTImageJul1_2026_06_15_18PM.png?v=1782911597&width=800"
-    ],
-    [
-      "https://rareu.in/cdn/shop/files/ChatGPTImageJun30_2026_09_02_27PM.png?v=1782886776&width=800"
-    ],
-    [
-      "https://rareu.in/cdn/shop/files/ChatGPTImageJul2_2026_12_14_35AM.png?v=1782931753&width=600"
-    ],
-    [
-      "https://rareu.in/cdn/shop/files/ChatGPTImageJul2_2026_12_09_13AM.png?v=1782931171&width=600"
-    ],
-    [
-      "https://rareu.in/cdn/shop/files/ChatGPTImageJul2_2026_01_00_27AM.png?v=1782934252&width=600"
-    ],
-    [
-      "https://rareu.in/cdn/shop/files/ChatGPTImageJun30_2026_09_37_49PM.png?v=1782925795&width=600"
-    ],
-    [
-      "https://rareu.in/cdn/shop/files/ChatGPTImageJul1_2026_11_16_11AM.png?v=1782888718&width=600"
-    ]
-  ];
-
-  // Rating pool for dynamic products
-  const ratingPool = [4.4, 4.5, 4.6, 4.7, 4.8, 4.9];
-  const reviewCountPool = [312, 541, 789, 1023, 1467, 1892, 2341, 876, 1234, 2987];
-
-  // MRP multiplier: always 1.5x–2x the sale price
-  function calcOriginalPrice(priceStr) {
-    const num = parseFloat(priceStr.replace(/[^0-9.]/g, '').replace(',', ''));
-    const multiplier = [1.6, 1.7, 1.8, 1.9, 2.0][Math.floor(Math.random() * 5)];
-    const orig = Math.round(num * multiplier / 100) * 100;
-    return '?' + orig.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-  }
-
-  // -------------------------------------------------------------
-  // Curated 100 Premium Oversized T-Shirt Designs
-  // -------------------------------------------------------------
-  const curatedPrefixes = ["Cyberpunk", "Tokyo Shift", "Aesthetic", "Retro Wave", "Gothic Grunge", "Urban Nomad", "Minimalist", "Ghost Tech", "Vintage Club", "Midnight"];
-  const curatedThemes = ["Satori Warrior", "Void Walker", "Matrix Glitch", "Chrome Rebellion", "Solar Eclipse", "Neon Shogun", "Phantom Calligraphy", "Distorted Ruin", "Kensei Blade", "Spectral Shift"];
-  const curatedWashes = ["in Acid-Wash Black", "in Wine Burgundy", "in Sandstone Beige", "in Pitch Charcoal", "in Vintage Indigo", "in Off-White Cream", "in Forest Olive", "in Slate Grey", "in Midnight Navy", "in Rust Terracotta"];
-
-  for (let i = 0; i < 100; i++) {
-    const prefix = curatedPrefixes[Math.floor(i / 10)];
-    const theme = curatedThemes[i % 10];
-    const wash = curatedWashes[(Math.floor(i / 10) + (i % 10)) % 10];
-    
-    const title = `StyleXWear '${prefix} ${theme}' Oversized Tee ${wash}`;
-    const handle = title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
-    const priceOptions = ["₹799", "₹899", "₹999", "₹1,099", "₹1,199"];
-    const price = priceOptions[i % priceOptions.length];
-    const description = `Premium heavy cotton drop-shoulder graphic tee from the exclusive StyleXWear Streetwear Collection. Featuring the high-definition '${prefix} ${theme}' screenprinted artwork on the back, crafted from durable 260 GSM combed French Terry cotton. Designed for a boxy relaxed fit with double-needle stitched seams and a reinforced ribbed crewneck collar.`;
-    
-    const images = baseImages[i % baseImages.length];
-    const id = (20990000000000 + i).toString();
-    const variantId = (59990000000000 + i).toString();
-    
-    PRODUCTS.push({
-      id: id,
-      variantId: variantId,
-      handle: handle,
-      title: title,
-      price: price,
-      originalPrice: calcOriginalPrice(price),
-      rating: ratingPool[i % ratingPool.length],
-      reviewCount: reviewCountPool[i % reviewCountPool.length],
-      category: "Oversized Premium",
-      description: description,
-      images: images,
-      gender: "Unisex"
-    });
-  }
-
-  const totalItemsNeeded = 800;
-  const currentBaseCount = PRODUCTS.length;
-  const additionalNeeded = totalItemsNeeded - currentBaseCount;
-
-  for (let i = 0; i < additionalNeeded; i++) {
-    const seed = i;
-    const prefix = prefixes[seed % prefixes.length];
-    const core = cores[(seed + 3) % cores.length];
-    const suffix = suffixes[(seed + 7) % suffixes.length];
-    
-    const title = `${prefix} ${core} ${suffix}`;
-    const handle = title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
-    
-    const priceOptions = ["₹699", "₹799", "₹849", "₹899", "₹999", "₹1,099", "₹1,199", "₹1,299", "₹1,499"];
-    const price = priceOptions[seed % priceOptions.length];
-    
-    let category = "Oversized Premium";
-    if (title.toLowerCase().includes("hoodie")) {
-      category = "Hoodies";
-    } else if (title.toLowerCase().includes("solid") || title.toLowerCase().includes("sweatshirt") || title.toLowerCase().includes("crewneck")) {
-      category = "The Solid Wear";
-    } else if (title.toLowerCase().includes("tee") || title.toLowerCase().includes("polo")) {
-      category = "Oversized Premium";
-    } else {
-      const extraCategories = ["Oversized Premium", "The Solid Wear"];
-      category = extraCategories[seed % extraCategories.length];
-    }
-    
-    const description = descriptions[seed % descriptions.length];
-    
-    let gender = "Unisex";
-    const genderRoll = seed % 10;
-    if (genderRoll < 2) {
-      gender = "Men";
-    } else if (genderRoll === 2) {
-      gender = "Women";
-    }
-    const images = baseImages[seed % baseImages.length];
-    const id = (10990000000000 + seed).toString();
-    const variantId = (49990000000000 + seed).toString();
-    
-    PRODUCTS.push({
-      id: id,
-      variantId: variantId,
-      handle: handle,
-      title: title,
-      price: price,
-      originalPrice: calcOriginalPrice(price),
-      rating: ratingPool[seed % ratingPool.length],
-      reviewCount: reviewCountPool[seed % reviewCountPool.length],
-      category: category,
-      description: description,
-      images: images,
-      gender: gender
-    });
-  }
-})();
-
 // Apply dynamic product overrides on load
 (function() {
   try {
+    if (typeof localStorage === 'undefined') return;
     const overrides = JSON.parse(localStorage.getItem('StyleXWear_productOverrides') || '{}');
     if (overrides) {
       PRODUCTS.forEach(prod => {
         if (overrides[prod.title]) {
           const parsedVal = parseFloat(overrides[prod.title]);
           if (!isNaN(parsedVal)) {
-            prod.price = "?" + Math.round(parsedVal).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            prod.price = "₹" + Math.round(parsedVal).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
           }
         }
       });
@@ -524,12 +331,28 @@ const PRODUCTS = [
 // Sync full custom products list from Master Admin Console if configured
 (function() {
   try {
+    if (typeof localStorage === 'undefined') return;
     const custom = localStorage.getItem('StyleXWear_customProducts');
     if (custom) {
       const parsed = JSON.parse(custom);
       if (Array.isArray(parsed) && parsed.length > 0) {
+        // If stored custom products contains the old bloated dummy catalog (> 50 items), clear it
+        if (parsed.length > 50) {
+          localStorage.removeItem('StyleXWear_customProducts');
+          return;
+        }
+        // Deduplicate by title to ensure clean catalog
+        const seen = new Set();
+        const unique = [];
+        parsed.forEach(p => {
+          const key = (p.title || '').trim().toLowerCase();
+          if (key && !seen.has(key)) {
+            seen.add(key);
+            unique.push(p);
+          }
+        });
         PRODUCTS.length = 0;
-        parsed.forEach(p => PRODUCTS.push(p));
+        unique.forEach(p => PRODUCTS.push(p));
       }
     }
   } catch(e) {

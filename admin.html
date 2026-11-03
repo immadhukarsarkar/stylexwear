@@ -709,10 +709,36 @@
     // Products Management Data
     function getStoredProducts() {
       const custom = localStorage.getItem('StyleXWear_customProducts');
+      let list = null;
       if (custom) {
-        try { return JSON.parse(custom); } catch(e) {}
+        try {
+          const parsed = JSON.parse(custom);
+          // If stored custom products contains the old bloated dummy catalog (> 50 items), clear it
+          if (Array.isArray(parsed) && parsed.length > 50) {
+            localStorage.removeItem('StyleXWear_customProducts');
+            list = null;
+          } else if (Array.isArray(parsed) && parsed.length > 0) {
+            list = parsed;
+          }
+        } catch(e) {}
       }
-      return (typeof PRODUCTS !== 'undefined') ? PRODUCTS : [];
+      if (!list) {
+        list = (typeof PRODUCTS !== 'undefined') ? PRODUCTS : [];
+      }
+      // Strict deduplication by title and ID
+      const seenTitles = new Set();
+      const seenIds = new Set();
+      const cleanList = [];
+      list.forEach(p => {
+        const titleKey = (p.title || '').trim().toLowerCase();
+        const idKey = (p.id || '').toString();
+        if (titleKey && !seenTitles.has(titleKey) && !seenIds.has(idKey)) {
+          seenTitles.add(titleKey);
+          seenIds.add(idKey);
+          cleanList.push(p);
+        }
+      });
+      return cleanList;
     }
 
     function saveStoredProducts(list) {
