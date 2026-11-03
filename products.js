@@ -1,4 +1,4 @@
-﻿const PRODUCTS = [
+const PRODUCTS = [
   {
     "id": "11000000000001",
     "handle": "test-payment-1-rupee",
@@ -518,5 +518,21 @@
     }
   } catch(e) {
     console.error('Error applying product overrides:', e);
+  }
+})();
+
+// Sync full custom products list from Master Admin Console if configured
+(function() {
+  try {
+    const custom = localStorage.getItem('StyleXWear_customProducts');
+    if (custom) {
+      const parsed = JSON.parse(custom);
+      if (Array.isArray(parsed) && parsed.length > 0) {
+        PRODUCTS.length = 0;
+        parsed.forEach(p => PRODUCTS.push(p));
+      }
+    }
+  } catch(e) {
+    console.error('Error applying custom products:', e);
   }
 })();
