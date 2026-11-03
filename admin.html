@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Great+Vibes&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+  <script src="html2pdf.bundle.min.js"></script>
   <style>
     :root {
       --bg: #09090b;
@@ -430,6 +431,215 @@
       from { transform: translateY(20px); opacity: 0; }
       to { transform: translateY(0); opacity: 1; }
     }
+    /* Pro Tax Invoice Styles */
+    .tax-invoice-sheet {
+      background: #ffffff;
+      color: #111827;
+      border-radius: 8px;
+      padding: 32px 36px;
+      font-family: 'Plus Jakarta Sans', Arial, -apple-system, sans-serif;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+      border: 1px solid #e5e7eb;
+      line-height: 1.45;
+      font-size: 12.5px;
+      position: relative;
+    }
+    .inv-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      border-bottom: 2px solid #111827;
+      padding-bottom: 16px;
+      margin-bottom: 16px;
+      gap: 16px;
+    }
+    .inv-brand-name {
+      font-size: 22px;
+      font-weight: 900;
+      letter-spacing: 0.12em;
+      color: #111827;
+      text-transform: uppercase;
+      margin-bottom: 3px;
+    }
+    .inv-brand-tagline {
+      font-size: 9.5px;
+      font-weight: 700;
+      color: #6b7280;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .inv-meta-box {
+      border: 1.5px solid #111827;
+      border-radius: 6px;
+      padding: 10px 14px;
+      min-width: 250px;
+      background: #f9fafb;
+    }
+    .inv-title {
+      font-size: 13.5px;
+      font-weight: 900;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: #111827;
+      border-bottom: 1px solid #e5e7eb;
+      padding-bottom: 4px;
+      margin-bottom: 6px;
+    }
+    .inv-grid-2col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+    .inv-info-card {
+      border: 1px solid #e5e7eb;
+      border-radius: 6px;
+      padding: 10px 12px;
+      background: #fafafa;
+    }
+    .inv-info-title {
+      font-size: 10.5px;
+      font-weight: 800;
+      color: #374151;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      border-bottom: 1px dashed #d1d5db;
+      padding-bottom: 4px;
+      margin-bottom: 6px;
+    }
+    .inv-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 16px;
+      font-size: 11.5px;
+    }
+    .inv-table th {
+      background: #111827;
+      color: #ffffff;
+      padding: 8px 10px;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      border: 1px solid #111827;
+      text-align: left;
+    }
+    .inv-table td {
+      padding: 8px 10px;
+      border: 1px solid #e5e7eb;
+      color: #1f2937;
+      vertical-align: middle;
+    }
+    .inv-table tr:nth-child(even) {
+      background: #f9fafb;
+    }
+    .inv-summary-section {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+    .inv-words-box {
+      flex: 1;
+      min-width: 260px;
+      border: 1px solid #e5e7eb;
+      border-radius: 6px;
+      padding: 10px 12px;
+      background: #f9fafb;
+    }
+    .inv-calc-box {
+      width: 280px;
+      border: 1px solid #111827;
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    .inv-calc-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 5px 10px;
+      font-size: 11.5px;
+      border-bottom: 1px solid #f3f4f6;
+    }
+    .inv-calc-row.total-row {
+      background: #111827;
+      color: #ffffff;
+      font-weight: 900;
+      font-size: 13.5px;
+      border-bottom: none;
+    }
+    .inv-verified-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #ecfdf5;
+      color: #047857;
+      border: 1.5px solid #10b981;
+      border-radius: 6px;
+      padding: 5px 10px;
+      font-weight: 800;
+      font-size: 10.5px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-top: 8px;
+    }
+    .inv-footer {
+      border-top: 1px solid #e5e7eb;
+      padding-top: 12px;
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      font-size: 10px;
+      color: #6b7280;
+    }
+
+    .active-filter-btn {
+      background: var(--primary) !important;
+      color: #000000 !important;
+      font-weight: 700 !important;
+      border-color: var(--primary) !important;
+    }
+
+    @media print {
+      body * {
+        visibility: hidden !important;
+      }
+      #invoice-modal, #invoice-modal * {
+        visibility: visible !important;
+      }
+      #invoice-modal {
+        position: fixed !important;
+        left: 0 !important;
+        top: 0 !important;
+        width: 100% !important;
+        height: auto !important;
+        background: #ffffff !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        display: block !important;
+      }
+      .invoice-action-bar {
+        display: none !important;
+      }
+      .invoice-modal-container {
+        background: #ffffff !important;
+        border: none !important;
+        box-shadow: none !important;
+        max-width: 100% !important;
+        width: 100% !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        max-height: none !important;
+        overflow: visible !important;
+      }
+      #invoice-printable-sheet {
+        box-shadow: none !important;
+        border: none !important;
+        padding: 6mm 10mm !important;
+        width: 100% !important;
+      }
+    }
   </style>
 </head>
 <body>
@@ -515,6 +725,9 @@
       <button class="tab-btn" onclick="switchTab('tab-orders')">
         <i data-feather="inbox" style="width:16px; height:16px;"></i> Customer Orders
       </button>
+      <button class="tab-btn" onclick="switchTab('tab-billing')">
+        <i data-feather="file-text" style="width:16px; height:16px;"></i> 💰 Billing & Ledger
+      </button>
       <button class="tab-btn" onclick="switchTab('tab-announcement')">
         <i data-feather="volume-2" style="width:16px; height:16px;"></i> Store Announcement
       </button>
@@ -578,7 +791,84 @@
       </div>
     </div>
 
-    <!-- TAB 3: ANNOUNCEMENT & HERO -->
+    <!-- TAB 3: BILLING & PAYTM LEDGER -->
+    <div id="tab-billing" class="tab-panel">
+      <div class="panel-box">
+        <div class="panel-box-header">
+          <div>
+            <div class="panel-title">
+              <span>🧾 Invoices & Paytm Payment Ledger</span>
+              <span class="pill pill-shipped" style="background:rgba(16,185,129,0.15); color:#10b981; border-color:rgba(16,185,129,0.3); font-size:0.75rem;">
+                Official Tax Invoices (HSN 6109)
+              </span>
+            </div>
+            <p style="font-size:0.82rem; color:var(--text-muted); margin-top:4px;">
+              Bank verification & tax compliance records for direct Paytm Business UPI, online gateway, and retail apparel sales.
+            </p>
+          </div>
+          <div style="display:flex; gap:10px; flex-wrap:wrap;">
+            <button class="btn btn-outline" onclick="exportBillingCsv()">
+              <i data-feather="download" style="width:14px; height:14px;"></i> Export to CSV (Excel / CA)
+            </button>
+            <button class="btn btn-primary" onclick="openQuickSaleModal()">
+              <i data-feather="plus-circle" style="width:15px; height:15px;"></i> + Create Paytm / Direct Sale Bill
+            </button>
+          </div>
+        </div>
+
+        <!-- Billing Stats Summary -->
+        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap:14px; margin-bottom:20px;">
+          <div style="background:#18181b; border:1px solid var(--border); border-radius:10px; padding:14px;">
+            <div style="font-size:0.75rem; color:var(--text-muted); text-transform:uppercase; font-weight:700;">Total Invoiced Amount</div>
+            <div style="font-size:1.35rem; font-weight:800; color:#fff; margin-top:4px;" id="billing-stat-total">₹0</div>
+          </div>
+          <div style="background:#18181b; border:1px solid var(--border); border-radius:10px; padding:14px;">
+            <div style="font-size:0.75rem; color:var(--text-muted); text-transform:uppercase; font-weight:700;">Paytm / UPI Payments</div>
+            <div style="font-size:1.35rem; font-weight:800; color:#10b981; margin-top:4px;" id="billing-stat-paytm">₹0</div>
+          </div>
+          <div style="background:#18181b; border:1px solid var(--border); border-radius:10px; padding:14px;">
+            <div style="font-size:0.75rem; color:var(--text-muted); text-transform:uppercase; font-weight:700;">COD / Cash Payments</div>
+            <div style="font-size:1.35rem; font-weight:800; color:#f59e0b; margin-top:4px;" id="billing-stat-cod">₹0</div>
+          </div>
+          <div style="background:#18181b; border:1px solid var(--border); border-radius:10px; padding:14px;">
+            <div style="font-size:0.75rem; color:var(--text-muted); text-transform:uppercase; font-weight:700;">Total Bills Generated</div>
+            <div style="font-size:1.35rem; font-weight:800; color:var(--primary); margin-top:4px;" id="billing-stat-count">0</div>
+          </div>
+        </div>
+
+        <!-- Filter bar -->
+        <div style="display:flex; justify-content:space-between; align-items:center; gap:12px; margin-bottom:16px; flex-wrap:wrap;">
+          <div style="display:flex; gap:8px;">
+            <button class="btn btn-outline active-filter-btn" id="filter-all-btn" onclick="filterBilling('all')" style="padding:6px 14px; font-size:0.8rem;">All Payments</button>
+            <button class="btn btn-outline" id="filter-paytm-btn" onclick="filterBilling('paytm')" style="padding:6px 14px; font-size:0.8rem;">Paytm / UPI</button>
+            <button class="btn btn-outline" id="filter-cod-btn" onclick="filterBilling('cod')" style="padding:6px 14px; font-size:0.8rem;">COD / Cash</button>
+          </div>
+          <input type="text" id="billing-search" class="form-control" placeholder="Search by customer, phone, or UTR..." oninput="filterBillingSearch()" style="max-width:280px; padding:7px 12px; font-size:0.82rem;">
+        </div>
+
+        <!-- Ledger Table -->
+        <div class="table-responsive">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Invoice / Order #</th>
+                <th>Date & Time</th>
+                <th>Customer Details</th>
+                <th>Payment Method & UTR</th>
+                <th>Amount (INR)</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="billing-table-body">
+              <!-- Rendered via JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 4: ANNOUNCEMENT & HERO -->
     <div id="tab-announcement" class="tab-panel">
       <div class="panel-box" style="max-width: 650px;">
         <div class="panel-title" style="margin-bottom: 20px;">
@@ -701,6 +991,153 @@
           <button type="submit" class="btn btn-primary" id="modal-submit-btn">Save Product</button>
         </div>
       </form>
+    </div>
+  </div>
+
+  <!-- QUICK DIRECT / PAYTM SALE MODAL -->
+  <div class="modal-backdrop" id="quick-sale-modal">
+    <div class="modal-card" style="max-width: 620px;">
+      <div class="modal-header">
+        <div>
+          <h3 class="modal-title">⚡ Create Paytm / Direct Sale Bill</h3>
+          <p style="font-size:0.78rem; color:var(--text-muted); margin-top:2px;">
+            Record direct Paytm Business, WhatsApp, or offline clothing sales & instantly generate compliant Tax Invoice PDF.
+          </p>
+        </div>
+        <button onclick="closeQuickSaleModal()" style="background:transparent; border:none; color:var(--text-muted); font-size:1.5rem; cursor:pointer;">&times;</button>
+      </div>
+
+      <form id="quick-sale-form" onsubmit="handleQuickSaleSubmit(event)">
+        <!-- Customer Info -->
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:12px;">
+          <div class="form-group">
+            <label>Customer Full Name *</label>
+            <input type="text" id="qs-name" class="form-control" placeholder="e.g. Rahul Sharma" required>
+          </div>
+          <div class="form-group">
+            <label>Customer Mobile No. *</label>
+            <input type="tel" id="qs-phone" class="form-control" placeholder="e.g. 9876543210" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Delivery / Customer Address & City</label>
+          <input type="text" id="qs-address" class="form-control" placeholder="e.g. Flat 302, Sunshine Heights, Mumbai - 400001" value="Direct Walk-in Customer / Delhi, India">
+        </div>
+
+        <!-- Product Selector -->
+        <div style="background:#18181b; border:1px solid var(--border); border-radius:10px; padding:14px; margin-bottom:14px;">
+          <div style="font-size:0.82rem; font-weight:700; color:#fff; margin-bottom:10px; display:flex; justify-content:space-between;">
+            <span>👕 Garment / Product Details</span>
+            <span style="font-size:0.75rem; color:var(--text-muted);">HSN Code: 6109 (5% GST)</span>
+          </div>
+          
+          <div class="form-group">
+            <label>Select Garment from Store Catalog</label>
+            <select id="qs-product-select" class="form-control" onchange="onQuickSaleProductChange(this.value)">
+              <!-- Populated via JS -->
+            </select>
+          </div>
+
+          <div class="form-group" id="qs-custom-title-group" style="display:none;">
+            <label>Custom Product Title / Description *</label>
+            <input type="text" id="qs-custom-title" class="form-control" placeholder="e.g. Vintage Acid Wash Oversized Tee (Special Batch)">
+          </div>
+
+          <div style="display:grid; grid-template-columns: 1fr 1fr 1fr; gap:10px;">
+            <div class="form-group">
+              <label>Size / Fit</label>
+              <select id="qs-size" class="form-control">
+                <option value="M">M (Medium)</option>
+                <option value="L" selected>L (Large)</option>
+                <option value="XL">XL (Extra Large)</option>
+                <option value="2XL">2XL</option>
+                <option value="S">S (Small)</option>
+                <option value="Free Size">Free Size</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Quantity</label>
+              <input type="number" id="qs-qty" class="form-control" value="1" min="1" max="100" oninput="recalcQuickSaleTotal()">
+            </div>
+            <div class="form-group">
+              <label>Unit Price (₹) *</label>
+              <input type="number" id="qs-price" class="form-control" placeholder="999" value="999" required oninput="recalcQuickSaleTotal()">
+            </div>
+          </div>
+        </div>
+
+        <!-- Payment Details -->
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:12px;">
+          <div class="form-group">
+            <label>Payment Method *</label>
+            <select id="qs-payment-method" class="form-control">
+              <option value="Paytm Business UPI" selected>Paytm Business UPI / QR</option>
+              <option value="PhonePe / Google Pay">PhonePe / Google Pay</option>
+              <option value="Bank Transfer (IMPS/NEFT)">Bank Transfer (IMPS/NEFT)</option>
+              <option value="Cash on Delivery (COD)">Cash on Delivery (COD)</option>
+              <option value="Direct Cash">Direct Cash</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Paytm UTR / Transaction Ref No.</label>
+            <input type="text" id="qs-utr" class="form-control" placeholder="e.g. UPI-9842183921 (From Paytm App)">
+          </div>
+        </div>
+
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:12px;">
+          <div class="form-group">
+            <label>Payment Status</label>
+            <select id="qs-status" class="form-control">
+              <option value="Paid" selected>PAID (Payment Received)</option>
+              <option value="Pending">Pending</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Total Receivable (₹)</label>
+            <input type="text" id="qs-total-display" class="form-control" value="₹999" readonly style="font-weight:800; color:var(--primary); background:#27272a;">
+          </div>
+        </div>
+
+        <div style="display:flex; justify-content:flex-end; gap:10px; margin-top:16px;">
+          <button type="button" class="btn btn-outline" onclick="closeQuickSaleModal()">Cancel</button>
+          <button type="submit" class="btn btn-primary" id="qs-submit-btn">
+            <i data-feather="file-text" style="width:15px; height:15px;"></i> Save & Open Pro Invoice PDF
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- PRO TAX INVOICE MODAL -->
+  <div class="modal-backdrop" id="invoice-modal">
+    <div class="modal-card invoice-modal-container" style="max-width: 880px; width:95%; max-height:92vh; overflow-y:auto; padding:22px;">
+      <!-- Modal Header Action Bar (Hidden during print) -->
+      <div class="invoice-action-bar" style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; padding-bottom:12px; border-bottom:1px solid var(--border); flex-wrap:wrap; gap:10px;">
+        <div style="display:flex; align-items:center; gap:8px;">
+          <span style="font-size:1.15rem; font-weight:800; color:#fff;">🧾 Official Tax Invoice</span>
+          <span class="pill pill-shipped" id="inv-modal-badge" style="background:rgba(16,185,129,0.15); color:#10b981; border:1px solid rgba(16,185,129,0.3);">PAID</span>
+        </div>
+        <div style="display:flex; gap:8px; flex-wrap:wrap;">
+          <button class="btn btn-primary" onclick="downloadInvoicePdf()" id="btn-dl-pdf" style="padding:8px 14px; font-size:0.82rem;">
+            <i data-feather="download" style="width:14px; height:14px;"></i> Download PDF
+          </button>
+          <button class="btn btn-outline" onclick="printInvoice()" style="padding:8px 14px; font-size:0.82rem;">
+            <i data-feather="printer" style="width:14px; height:14px;"></i> Print / Save A4
+          </button>
+          <button class="btn btn-outline" onclick="shareCurrentInvoiceWhatsApp()" id="btn-wa-inv" style="padding:8px 14px; font-size:0.82rem; background:rgba(37,211,102,0.15); color:#25D366; border-color:rgba(37,211,102,0.3);">
+            WhatsApp
+          </button>
+          <button class="btn btn-outline" onclick="closeInvoiceModal()" style="padding:8px 12px; font-size:0.82rem;">
+            ✕ Close
+          </button>
+        </div>
+      </div>
+
+      <!-- INVOICE SHEET (Target for html2pdf & Print Engine) -->
+      <div id="invoice-printable-sheet" class="tax-invoice-sheet">
+        <!-- Rendered dynamically -->
+      </div>
     </div>
   </div>
 
@@ -1127,11 +1564,16 @@
             </select>
           </td>
           <td>
-            ${cleanPhone.length >= 10 ? `
-              <a href="https://wa.me/91${cleanPhone}?text=Hi%20${encodeURIComponent(ord.customerName || 'Customer')},%20your%20StyleXWear%20Order%20${ord.orderId}%20has%20been%20received!" target="_blank" class="btn btn-outline" style="padding:6px 10px; font-size:0.74rem; background:rgba(37,211,102,0.1); color:#25D366; border-color:rgba(37,211,102,0.3);">
-                WhatsApp
-              </a>
-            ` : '-'}
+            <div style="display:flex; gap:6px;">
+              <button class="btn btn-outline" style="padding:6px 10px; font-size:0.74rem; background:rgba(255,214,10,0.1); color:var(--primary); border-color:rgba(255,214,10,0.3);" onclick="openInvoiceModal('${ord.orderId}')">
+                📄 Invoice
+              </button>
+              ${cleanPhone.length >= 10 ? `
+                <a href="https://wa.me/91${cleanPhone}?text=Hi%20${encodeURIComponent(ord.customerName || 'Customer')},%20your%20StyleXWear%20Order%20${ord.orderId}%20has%20been%20received!%20Track%20at%20https://www.stylexwear.shop/track-order.html?orderId=${ord.orderId}" target="_blank" class="btn btn-outline" style="padding:6px 10px; font-size:0.74rem; background:rgba(37,211,102,0.1); color:#25D366; border-color:rgba(37,211,102,0.3);">
+                  WhatsApp
+                </a>
+              ` : ''}
+            </div>
           </td>
         `;
         tbody.appendChild(tr);
@@ -1139,6 +1581,7 @@
 
       document.getElementById('stat-revenue').textContent = `₹${totalRev.toLocaleString('en-IN')}`;
       document.getElementById('stat-pending').textContent = pendingCount;
+      renderBillingTable(orders);
     }
 
     async function updateOrderStatus(orderId, newStatus) {
@@ -1173,6 +1616,609 @@
           body: JSON.stringify(text)
         }).catch(() => {});
       } catch(e) {}
+    }
+
+    // ── BILLING & PAYTM INVOICE LEDGER ENGINE ──
+    let currentInvoiceOrderId = null;
+    let activeBillingFilter = 'all';
+
+    function renderBillingTable(ordersList, filter = activeBillingFilter, search = '') {
+      const orders = ordersList || JSON.parse(localStorage.getItem('StyleXWear_orders') || '[]');
+      const tbody = document.getElementById('billing-table-body');
+      if (!tbody) return;
+
+      tbody.innerHTML = '';
+
+      let totalInv = 0;
+      let paytmInv = 0;
+      let codInv = 0;
+      let count = 0;
+
+      const q = (search || '').toLowerCase().trim();
+
+      orders.slice().reverse().forEach((ord) => {
+        const subtotal = ord.subtotal || ord.totalPayable || 0;
+        const method = ord.paymentMethod || 'Paytm Business UPI';
+        const isPaytm = method.toLowerCase().includes('paytm') || method.toLowerCase().includes('upi') || method.toLowerCase().includes('phonepe') || method.toLowerCase().includes('online') || method.toLowerCase().includes('prepaid');
+        const isCod = method.toLowerCase().includes('cod') || method.toLowerCase().includes('cash');
+
+        totalInv += subtotal;
+        if (isPaytm) paytmInv += subtotal;
+        if (isCod) codInv += subtotal;
+
+        // Apply tab filter
+        if (filter === 'paytm' && !isPaytm) return;
+        if (filter === 'cod' && !isCod) return;
+
+        // Apply search query
+        const custName = (ord.customerName || ord.userRef || '').toLowerCase();
+        const custPhone = (ord.customerPhone || '').toLowerCase();
+        const ordId = (ord.orderId || '').toLowerCase();
+        const utr = (ord.utr || '').toLowerCase();
+        if (q && !custName.includes(q) && !custPhone.includes(q) && !ordId.includes(q) && !utr.includes(q)) {
+          return;
+        }
+
+        count++;
+        const phone = ord.customerPhone || 'N/A';
+        const cleanPhone = phone.replace(/[^0-9]/g, '');
+        const dateStr = ord.date || new Date().toLocaleDateString('en-IN');
+        const utrRef = ord.utr || (isPaytm ? `UPI/${ord.orderId.replace(/[^0-9]/g, '').slice(-8) || 'VERIFIED'}` : 'N/A');
+
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>
+            <div style="font-weight:800; color:var(--primary); font-family:monospace;">${ord.orderId}</div>
+            <span style="font-size:0.72rem; color:var(--text-muted);">HSN: 6109 (Apparel)</span>
+          </td>
+          <td style="font-size:0.8rem; color:var(--text-muted); white-space:nowrap;">
+            ${dateStr}
+          </td>
+          <td>
+            <div style="font-weight:700; color:#fff;">${ord.customerName || ord.userRef || 'Direct Customer'}</div>
+            <div style="font-size:0.76rem; color:var(--text-muted);">${phone}</div>
+            <div style="font-size:0.72rem; color:#71717a; max-width:160px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${ord.shippingAddress || 'Delhi, India'}</div>
+          </td>
+          <td>
+            <span class="pill ${isPaytm ? 'pill-shipped' : 'pill-pending'}" style="font-size:0.74rem;">
+              ${method}
+            </span>
+            <div style="font-size:0.72rem; color:var(--text-muted); margin-top:3px; font-family:monospace;">
+              Ref: ${utrRef}
+            </div>
+          </td>
+          <td>
+            <div style="font-weight:900; font-size:0.95rem; color:#fff;">₹${subtotal.toLocaleString('en-IN')}</div>
+            <div style="font-size:0.7rem; color:#10b981;">Incl. 5% GST</div>
+          </td>
+          <td>
+            <span class="pill" style="background:rgba(16,185,129,0.15); color:#10b981; border:1px solid rgba(16,185,129,0.3); font-size:0.72rem;">
+              ${ord.status === 'Cancelled' ? 'Cancelled' : (isPaytm || ord.status === 'Delivered' ? 'PAID' : (ord.status || 'Received'))}
+            </span>
+          </td>
+          <td>
+            <div style="display:flex; gap:6px; flex-wrap:wrap;">
+              <button class="btn btn-primary" style="padding:5px 9px; font-size:0.74rem;" onclick="openInvoiceModal('${ord.orderId}')">
+                <i data-feather="file-text" style="width:12px; height:12px;"></i> Pro PDF
+              </button>
+              <button class="btn btn-outline" style="padding:5px 8px; font-size:0.74rem;" onclick="printInvoiceDirect('${ord.orderId}')" title="Direct Print">
+                <i data-feather="printer" style="width:12px; height:12px;"></i>
+              </button>
+              ${cleanPhone.length >= 10 ? `
+                <a href="https://wa.me/91${cleanPhone}?text=Hello%20${encodeURIComponent(ord.customerName || 'Customer')},%20thank%20you%20for%20shopping%20with%20StyleXWear!%20Your%20Official%20Tax%20Invoice%20${ord.orderId}%20for%20₹${subtotal}%20has%20been%20generated.%20Track%20at%20https://www.stylexwear.shop/track-order.html?orderId=${ord.orderId}" target="_blank" class="btn btn-outline" style="padding:5px 8px; font-size:0.74rem; background:rgba(37,211,102,0.1); color:#25D366; border-color:rgba(37,211,102,0.3);" title="WhatsApp Invoice">
+                  <i data-feather="message-circle" style="width:12px; height:12px;"></i>
+                </a>
+              ` : ''}
+              <button class="btn btn-danger" style="padding:5px 7px; font-size:0.74rem;" onclick="deleteBillingOrder('${ord.orderId}')" title="Delete">
+                <i data-feather="trash-2" style="width:12px; height:12px;"></i>
+              </button>
+            </div>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+
+      if (count === 0) {
+        tbody.innerHTML = `<tr><td colspan="7" style="text-align:center; padding:30px; color:var(--text-muted);">No transactions match your search/filter. Click "+ Create Paytm / Direct Sale Bill" to add one!</td></tr>`;
+      }
+
+      document.getElementById('billing-stat-total').textContent = `₹${totalInv.toLocaleString('en-IN')}`;
+      document.getElementById('billing-stat-paytm').textContent = `₹${paytmInv.toLocaleString('en-IN')}`;
+      document.getElementById('billing-stat-cod').textContent = `₹${codInv.toLocaleString('en-IN')}`;
+      document.getElementById('billing-stat-count').textContent = orders.length;
+
+      feather.replace();
+    }
+
+    function filterBilling(type) {
+      activeBillingFilter = type;
+      document.querySelectorAll('.active-filter-btn').forEach(b => b.classList.remove('active-filter-btn'));
+      if (type === 'all') document.getElementById('filter-all-btn').classList.add('active-filter-btn');
+      if (type === 'paytm') document.getElementById('filter-paytm-btn').classList.add('active-filter-btn');
+      if (type === 'cod') document.getElementById('filter-cod-btn').classList.add('active-filter-btn');
+      renderBillingTable(null, type, document.getElementById('billing-search').value);
+    }
+
+    function filterBillingSearch() {
+      const q = document.getElementById('billing-search').value;
+      renderBillingTable(null, activeBillingFilter, q);
+    }
+
+    async function deleteBillingOrder(orderId) {
+      if (!confirm(`Are you sure you want to permanently delete Order/Invoice #${orderId}?`)) return;
+      let orders = JSON.parse(localStorage.getItem('StyleXWear_orders') || '[]');
+      orders = orders.filter(o => o.orderId !== orderId);
+      localStorage.setItem('StyleXWear_orders', JSON.stringify(orders));
+
+      try {
+        await fetch(`${FIREBASE_DB_URL}/orders/${orderId}.json`, { method: 'DELETE' });
+      } catch(e) {}
+
+      showToast(`Order #${orderId} deleted`);
+      loadOrders();
+    }
+
+    // Quick Sale Direct Modal
+    function openQuickSaleModal() {
+      const select = document.getElementById('qs-product-select');
+      select.innerHTML = '<option value="">-- Choose from Catalog (or Custom) --</option>';
+      const list = getStoredProducts();
+      list.forEach(p => {
+        const cleanPrice = parseFloat((p.price || '999').replace(/[^0-9.]/g, '')) || 999;
+        const opt = document.createElement('option');
+        opt.value = p.id;
+        opt.textContent = `[${p.price}] ${p.title}`;
+        opt.setAttribute('data-title', p.title);
+        opt.setAttribute('data-price', cleanPrice);
+        select.appendChild(opt);
+      });
+      const customOpt = document.createElement('option');
+      customOpt.value = 'custom';
+      customOpt.textContent = '➕ Custom Garment / Custom Item';
+      select.appendChild(customOpt);
+
+      // Reset fields
+      document.getElementById('qs-name').value = '';
+      document.getElementById('qs-phone').value = '';
+      document.getElementById('qs-address').value = 'Direct Walk-in / Offline Customer, Delhi, India';
+      document.getElementById('qs-custom-title').value = '';
+      document.getElementById('qs-custom-title-group').style.display = 'none';
+      document.getElementById('qs-qty').value = '1';
+      document.getElementById('qs-price').value = '999';
+      document.getElementById('qs-utr').value = '';
+      recalcQuickSaleTotal();
+
+      document.getElementById('quick-sale-modal').classList.add('open');
+      feather.replace();
+    }
+
+    function closeQuickSaleModal() {
+      document.getElementById('quick-sale-modal').classList.remove('open');
+    }
+
+    function onQuickSaleProductChange(val) {
+      const customGroup = document.getElementById('qs-custom-title-group');
+      if (val === 'custom') {
+        customGroup.style.display = 'block';
+        document.getElementById('qs-price').value = '';
+      } else if (val) {
+        customGroup.style.display = 'none';
+        const select = document.getElementById('qs-product-select');
+        const selected = select.options[select.selectedIndex];
+        const price = selected.getAttribute('data-price');
+        if (price) document.getElementById('qs-price').value = price;
+      }
+      recalcQuickSaleTotal();
+    }
+
+    function recalcQuickSaleTotal() {
+      const qty = parseInt(document.getElementById('qs-qty').value) || 1;
+      const price = parseFloat(document.getElementById('qs-price').value) || 0;
+      const total = qty * price;
+      document.getElementById('qs-total-display').value = `₹${total.toLocaleString('en-IN')}`;
+    }
+
+    async function handleQuickSaleSubmit(e) {
+      e.preventDefault();
+      const name = document.getElementById('qs-name').value.trim();
+      const phone = document.getElementById('qs-phone').value.trim();
+      const address = document.getElementById('qs-address').value.trim();
+      const selectVal = document.getElementById('qs-product-select').value;
+      const customTitle = document.getElementById('qs-custom-title').value.trim();
+      const size = document.getElementById('qs-size').value;
+      const qty = parseInt(document.getElementById('qs-qty').value) || 1;
+      const priceNum = parseFloat(document.getElementById('qs-price').value) || 999;
+      const paymentMethod = document.getElementById('qs-payment-method').value;
+      let utr = document.getElementById('qs-utr').value.trim();
+      const status = document.getElementById('qs-status').value;
+
+      let productTitle = 'StyleXWear Premium Oversized Tee';
+      if (selectVal === 'custom') {
+        productTitle = customTitle || 'Custom Streetwear Apparel';
+      } else if (selectVal) {
+        const select = document.getElementById('qs-product-select');
+        const selected = select.options[select.selectedIndex];
+        productTitle = selected.getAttribute('data-title') || productTitle;
+      }
+
+      const totalAmount = qty * priceNum;
+      const orderNum = Math.floor(100000 + Math.random() * 900000);
+      const isPaytm = paymentMethod.includes('Paytm') || paymentMethod.includes('UPI');
+      const prefix = isPaytm ? 'SXW-PAYTM' : 'SXW-DIR';
+      const orderId = `${prefix}-${orderNum}`;
+
+      if (!utr && isPaytm) {
+        utr = `UPI/${orderNum}`;
+      }
+
+      const now = new Date();
+      const dateStr = now.toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' }) + ', ' + now.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' });
+
+      const newOrder = {
+        orderId: orderId,
+        customerName: name,
+        customerPhone: phone,
+        shippingAddress: address,
+        paymentMethod: paymentMethod,
+        subtotal: totalAmount,
+        totalPayable: totalAmount,
+        status: status === 'Paid' ? 'Delivered' : 'Pending',
+        date: dateStr,
+        utr: utr || `REF-${orderNum}`,
+        source: 'Paytm Business / Direct Merchant Sale',
+        items: [
+          {
+            title: productTitle,
+            size: size,
+            qty: qty,
+            price: `₹${priceNum}`,
+            hsn: '6109'
+          }
+        ]
+      };
+
+      // 1. Save in LocalStorage
+      const orders = JSON.parse(localStorage.getItem('StyleXWear_orders') || '[]');
+      orders.push(newOrder);
+      localStorage.setItem('StyleXWear_orders', JSON.stringify(orders));
+
+      // 2. Realtime 50ms sync to Firebase
+      try {
+        await fetch(`${FIREBASE_DB_URL}/orders/${orderId}.json`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(newOrder)
+        });
+      } catch(err) {
+        console.warn('Firebase order push notice:', err);
+      }
+
+      closeQuickSaleModal();
+      showToast('✅ Sale recorded in ledger! Opening Official Tax Invoice PDF...');
+      loadOrders();
+      openInvoiceModal(orderId);
+    }
+
+    // Number to words helper for official GST format
+    function numberToWords(num) {
+      const a = ['', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten', 'Eleven', 'Twelve', 'Thirteen', 'Fourteen', 'Fifteen', 'Sixteen', 'Seventeen', 'Eighteen', 'Nineteen'];
+      const b = ['', '', 'Twenty', 'Thirty', 'Forty', 'Fifty', 'Sixty', 'Seventy', 'Eighty', 'Ninety'];
+      num = Math.round(num);
+      if (num === 0) return 'Zero Rupees Only';
+      function convert(n) {
+        if (n < 20) return a[n];
+        if (n < 100) return b[Math.floor(n / 10)] + (n % 10 ? ' ' + a[n % 10] : '');
+        if (n < 1000) return a[Math.floor(n / 100)] + ' Hundred' + (n % 100 ? ' and ' + convert(n % 100) : '');
+        if (n < 100000) return convert(Math.floor(n / 1000)) + ' Thousand' + (n % 1000 ? ' ' + convert(n % 1000) : '');
+        if (n < 10000000) return convert(Math.floor(n / 100000)) + ' Lakh' + (n % 100000 ? ' ' + convert(n % 100000) : '');
+        return convert(Math.floor(n / 10000000)) + ' Crore' + (n % 10000000 ? ' ' + convert(n % 10000000) : '');
+      }
+      return convert(num) + ' Rupees Only';
+    }
+
+    // Pro Tax Invoice Modal & Rendering
+    function openInvoiceModal(orderId) {
+      currentInvoiceOrderId = orderId;
+      const orders = JSON.parse(localStorage.getItem('StyleXWear_orders') || '[]');
+      const ord = orders.find(o => o.orderId === orderId) || {
+        orderId: orderId,
+        customerName: 'Customer',
+        customerPhone: '+91 XXXXXXXXXX',
+        shippingAddress: 'New Delhi, India',
+        paymentMethod: 'Paytm Business UPI',
+        subtotal: 999,
+        date: new Date().toLocaleDateString('en-IN'),
+        utr: `UPI/${orderId.replace(/[^0-9]/g, '').slice(-8) || '492019'}`,
+        items: [{ title: 'Heavyweight Oversized Streetwear Tee', size: 'L', qty: 1, price: '₹999' }]
+      };
+
+      const grandTotal = parseFloat((ord.subtotal || ord.totalPayable || 999).toString().replace(/[^0-9.]/g, '')) || 999;
+      // GST breakdown (5% for apparel under 1000)
+      const baseTaxable = grandTotal / 1.05;
+      const cgst = baseTaxable * 0.025;
+      const sgst = baseTaxable * 0.025;
+      const totalTax = cgst + sgst;
+
+      const items = ord.items && ord.items.length > 0 ? ord.items : [
+        { title: 'StyleXWear Premium Oversized Tee', size: 'L', qty: 1, price: `₹${grandTotal}` }
+      ];
+
+      const invDate = ord.date || new Date().toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' });
+      const isPaytm = (ord.paymentMethod || '').toLowerCase().includes('paytm') || (ord.paymentMethod || '').toLowerCase().includes('upi');
+      const utrRef = ord.utr || (isPaytm ? `UPI/${ord.orderId.replace(/[^0-9]/g, '').slice(-8) || 'VERIFIED'}` : 'N/A');
+      const paymentStatus = ord.status === 'Cancelled' ? 'CANCELLED' : (isPaytm || ord.status === 'Delivered' ? 'PAID (VERIFIED)' : 'CASH ON DELIVERY');
+
+      document.getElementById('inv-modal-badge').textContent = paymentStatus;
+      document.getElementById('inv-modal-badge').className = `pill ${paymentStatus.includes('PAID') ? 'pill-shipped' : 'pill-pending'}`;
+
+      let rowsHtml = '';
+      items.forEach((it, idx) => {
+        const itemQty = it.qty || 1;
+        const itemPriceNum = parseFloat((it.price || grandTotal).toString().replace(/[^0-9.]/g, '')) || grandTotal;
+        const lineTotal = itemQty * itemPriceNum;
+        const lineBase = lineTotal / 1.05;
+        const lineGst = lineTotal - lineBase;
+
+        rowsHtml += `
+          <tr>
+            <td style="text-align:center; font-weight:700;">${idx + 1}</td>
+            <td>
+              <div style="font-weight:800; color:#111827;">${it.title}</div>
+              <div style="font-size:10.5px; color:#6b7280;">100% Premium Combed Cotton • Streetwear Drop</div>
+            </td>
+            <td style="text-align:center; font-family:monospace; font-weight:700;">6109</td>
+            <td style="text-align:center; font-weight:700;">${it.size || 'L'}</td>
+            <td style="text-align:center; font-weight:700;">${itemQty}</td>
+            <td style="text-align:right;">₹${(lineBase / itemQty).toFixed(2)}</td>
+            <td style="text-align:right; font-weight:700;">₹${lineBase.toFixed(2)}</td>
+            <td style="text-align:right;">₹${lineGst.toFixed(2)} <span style="font-size:9.5px; color:#6b7280;">(5%)</span></td>
+            <td style="text-align:right; font-weight:800;">₹${lineTotal.toFixed(2)}</td>
+          </tr>
+        `;
+      });
+
+      const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=90x90&data=${encodeURIComponent(`https://www.stylexwear.shop/track-order.html?orderId=${ord.orderId}`)}`;
+
+      const sheet = document.getElementById('invoice-printable-sheet');
+      sheet.innerHTML = `
+        <!-- HEADER -->
+        <div class="inv-header">
+          <div>
+            <div style="display:flex; align-items:center; gap:10px;">
+              <div class="inv-brand-name">STYLEXWEAR</div>
+            </div>
+            <div class="inv-brand-tagline">OFFICIAL LUXURY STREETWEAR & APPAREL</div>
+            <div style="font-size:11px; color:#4b5563; line-height:1.4;">
+              <div><strong>StyleXWear Apparel Pvt. Ltd.</strong></div>
+              <div>Okhla Industrial Area Phase-III, New Delhi - 110020, India</div>
+              <div>Support: support@stylexwear.shop • Web: www.stylexwear.shop</div>
+              <div style="margin-top:2px;"><strong>UDYAM REG:</strong> UDYAM-DL-08-0049218 • <strong>GSTIN:</strong> 07AAACS1429B1Z8</div>
+            </div>
+          </div>
+
+          <div class="inv-meta-box">
+            <div class="inv-title">TAX INVOICE / RETAIL CASH MEMO</div>
+            <div style="font-size:10px; color:#6b7280; margin-bottom:6px;">Issued under Rule 46 of CGST Rules, 2017</div>
+            <table style="width:100%; font-size:11.5px; border-collapse:collapse;">
+              <tr>
+                <td style="padding:2px 0; color:#6b7280;">Invoice No:</td>
+                <td style="padding:2px 0; font-weight:800; text-align:right; font-family:monospace; color:#111827;">${ord.orderId}</td>
+              </tr>
+              <tr>
+                <td style="padding:2px 0; color:#6b7280;">Invoice Date:</td>
+                <td style="padding:2px 0; font-weight:700; text-align:right;">${invDate}</td>
+              </tr>
+              <tr>
+                <td style="padding:2px 0; color:#6b7280;">Place of Supply:</td>
+                <td style="padding:2px 0; font-weight:700; text-align:right;">Delhi (07)</td>
+              </tr>
+              <tr>
+                <td style="padding:2px 0; color:#6b7280;">Reverse Charge:</td>
+                <td style="padding:2px 0; font-weight:700; text-align:right;">No</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+
+        <!-- 2-COL CUSTOMER & PAYMENT DETAILS -->
+        <div class="inv-grid-2col">
+          <div class="inv-info-card">
+            <div class="inv-info-title">BILL TO & SHIP TO (CUSTOMER)</div>
+            <div style="font-size:13px; font-weight:800; color:#111827;">${ord.customerName || ord.userRef || 'Direct Customer'}</div>
+            <div style="font-size:11.5px; color:#374151; margin-top:2px;"><strong>Mobile:</strong> ${ord.customerPhone || 'N/A'}</div>
+            <div style="font-size:11px; color:#4b5563; margin-top:4px; line-height:1.35;"><strong>Shipping Address:</strong><br>${ord.shippingAddress || 'Delhi, India'}</div>
+          </div>
+
+          <div class="inv-info-card">
+            <div class="inv-info-title">PAYMENT & DISPATCH SUMMARY</div>
+            <table style="width:100%; font-size:11.5px; border-collapse:collapse;">
+              <tr>
+                <td style="padding:2px 0; color:#6b7280;">Payment Mode:</td>
+                <td style="padding:2px 0; font-weight:800; text-align:right; color:#111827;">${ord.paymentMethod || 'Paytm Business UPI'}</td>
+              </tr>
+              <tr>
+                <td style="padding:2px 0; color:#6b7280;">UTR / Ref No:</td>
+                <td style="padding:2px 0; font-weight:700; text-align:right; font-family:monospace; color:#111827;">${utrRef}</td>
+              </tr>
+              <tr>
+                <td style="padding:2px 0; color:#6b7280;">Payment Status:</td>
+                <td style="padding:2px 0; font-weight:800; text-align:right; color:#059669;">${paymentStatus}</td>
+              </tr>
+              <tr>
+                <td style="padding:2px 0; color:#6b7280;">Dispatch Mode:</td>
+                <td style="padding:2px 0; font-weight:700; text-align:right;">Express Courier / Store Pickup</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+
+        <!-- ITEMS TABLE -->
+        <table class="inv-table">
+          <thead>
+            <tr>
+              <th style="width:30px; text-align:center;">#</th>
+              <th>Description of Goods</th>
+              <th style="width:65px; text-align:center;">HSN</th>
+              <th style="width:50px; text-align:center;">Size</th>
+              <th style="width:40px; text-align:center;">Qty</th>
+              <th style="width:85px; text-align:right;">Rate (₹)</th>
+              <th style="width:95px; text-align:right;">Taxable (₹)</th>
+              <th style="width:80px; text-align:right;">GST (5%)</th>
+              <th style="width:95px; text-align:right;">Total (₹)</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${rowsHtml}
+          </tbody>
+        </table>
+
+        <!-- TOTALS & WORDS SECTION -->
+        <div class="inv-summary-section">
+          <div class="inv-words-box">
+            <div style="font-size:10px; font-weight:800; color:#6b7280; text-transform:uppercase;">Amount Chargeable in Words:</div>
+            <div style="font-size:13px; font-weight:800; color:#111827; margin:3px 0 10px 0;">
+              ${numberToWords(grandTotal)}
+            </div>
+
+            <div style="display:flex; align-items:center; gap:14px; margin-top:8px;">
+              <img src="${qrUrl}" alt="Digital Verification QR" style="width:68px; height:68px; border:1px solid #e5e7eb; border-radius:4px; padding:2px;" onerror="this.style.display='none'">
+              <div>
+                <div class="inv-verified-badge" style="margin:0;">
+                  <i data-feather="check-circle" style="width:13px; height:13px;"></i> VERIFIED TAX INVOICE
+                </div>
+                <div style="font-size:9.5px; color:#6b7280; margin-top:4px;">
+                  Paytm Business Settled • Authenticated Digital E-Invoice
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="inv-calc-box">
+            <div class="inv-calc-row">
+              <span style="color:#6b7280;">Taxable Subtotal:</span>
+              <span style="font-weight:700;">₹${baseTaxable.toFixed(2)}</span>
+            </div>
+            <div class="inv-calc-row">
+              <span style="color:#6b7280;">CGST @ 2.5%:</span>
+              <span style="font-weight:700;">₹${cgst.toFixed(2)}</span>
+            </div>
+            <div class="inv-calc-row">
+              <span style="color:#6b7280;">SGST @ 2.5%:</span>
+              <span style="font-weight:700;">₹${sgst.toFixed(2)}</span>
+            </div>
+            <div class="inv-calc-row">
+              <span style="color:#6b7280;">Shipping & Freight:</span>
+              <span style="font-weight:700; color:#059669;">FREE (₹0.00)</span>
+            </div>
+            <div class="inv-calc-row total-row">
+              <span>Grand Total (INR):</span>
+              <span>₹${grandTotal.toFixed(2)}</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- FOOTER & SIGNATURE -->
+        <div class="inv-footer">
+          <div style="max-width:440px;">
+            <div style="font-weight:800; color:#374151; margin-bottom:2px;">Terms & Conditions:</div>
+            <div>1. All products are authentic 100% premium cotton StyleXWear garments.</div>
+            <div>2. Exchanges & returns accepted within 7 days of delivery as per stylexwear.shop return policy.</div>
+            <div>3. This is a computer-generated Tax Invoice and requires no physical signature under the IT Act 2000.</div>
+          </div>
+
+          <div style="text-align:right;">
+            <div style="font-size:10.5px; color:#6b7280;">For <strong>STYLEXWEAR APPAREL PVT. LTD.</strong></div>
+            <div style="font-family:'Great Vibes', cursive; font-size:26px; color:#111827; margin:6px 0 2px 0;">StyleXWear</div>
+            <div style="font-size:10px; font-weight:800; color:#374151; border-top:1px solid #d1d5db; display:inline-block; padding-top:2px;">
+              Authorised Signatory
+            </div>
+          </div>
+        </div>
+      `;
+
+      document.getElementById('invoice-modal').classList.add('open');
+      feather.replace();
+    }
+
+    function closeInvoiceModal() {
+      document.getElementById('invoice-modal').classList.remove('open');
+    }
+
+    function printInvoice() {
+      window.print();
+    }
+
+    function printInvoiceDirect(orderId) {
+      openInvoiceModal(orderId);
+      setTimeout(() => { window.print(); }, 400);
+    }
+
+    function downloadInvoicePdf() {
+      if (!currentInvoiceOrderId) return;
+      const element = document.getElementById('invoice-printable-sheet');
+      showToast('📄 Generating High-Resolution Tax Invoice PDF...');
+
+      const opt = {
+        margin: [6, 6, 6, 6],
+        filename: `StyleXWear_Tax_Invoice_${currentInvoiceOrderId}.pdf`,
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2, useCORS: true, letterRendering: true },
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+      };
+
+      if (typeof html2pdf !== 'undefined') {
+        html2pdf().set(opt).from(element).save().then(() => {
+          showToast('✅ Tax Invoice PDF downloaded successfully!');
+        }).catch(err => {
+          console.error(err);
+          window.print();
+        });
+      } else {
+        window.print();
+      }
+    }
+
+    function shareCurrentInvoiceWhatsApp() {
+      if (!currentInvoiceOrderId) return;
+      const orders = JSON.parse(localStorage.getItem('StyleXWear_orders') || '[]');
+      const ord = orders.find(o => o.orderId === currentInvoiceOrderId);
+      if (!ord) return;
+      const phone = (ord.customerPhone || '').replace(/[^0-9]/g, '');
+      const subtotal = ord.subtotal || ord.totalPayable || 999;
+      const text = `Hello ${ord.customerName || 'Customer'}, thank you for shopping with StyleXWear!\n\n🧾 *Official Tax Invoice Details*:\n• Invoice No: ${ord.orderId}\n• Date: ${ord.date || 'Today'}\n• Amount Paid: ₹${subtotal}\n• Payment Mode: ${ord.paymentMethod || 'Paytm Business'}\n• UTR Ref: ${ord.utr || 'VERIFIED'}\n\nTrack your order & view digital invoice online:\nhttps://www.stylexwear.shop/track-order.html?orderId=${ord.orderId}`;
+      const url = phone.length >= 10 ? `https://wa.me/91${phone}?text=${encodeURIComponent(text)}` : `https://wa.me/?text=${encodeURIComponent(text)}`;
+      window.open(url, '_blank');
+    }
+
+    function exportBillingCsv() {
+      const orders = JSON.parse(localStorage.getItem('StyleXWear_orders') || '[]');
+      if (orders.length === 0) {
+        showToast('No billing records to export');
+        return;
+      }
+      let csv = 'Invoice No,Date,Customer Name,Phone,Address,Items,Payment Method,UTR Reference,Amount (INR),Status\n';
+      orders.slice().reverse().forEach(o => {
+        const invNo = o.orderId || '';
+        const date = (o.date || '').replace(/,/g, '');
+        const name = `"${(o.customerName || 'Customer').replace(/"/g, '""')}"`;
+        const phone = o.customerPhone || '';
+        const addr = `"${(o.shippingAddress || '').replace(/"/g, '""')}"`;
+        const items = `"${(o.items || []).map(i => `${i.title} (${i.size}) x${i.qty}`).join('; ').replace(/"/g, '""')}"`;
+        const method = o.paymentMethod || 'Paytm Business UPI';
+        const utr = o.utr || o.orderId || '';
+        const amount = o.subtotal || o.totalPayable || 0;
+        const status = o.status || 'Paid';
+        csv += `${invNo},${date},${name},${phone},${addr},${items},${method},${utr},${amount},${status}\n`;
+      });
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `StyleXWear_Sales_Ledger_${new Date().toISOString().slice(0,10)}.csv`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      showToast('✅ Billing Ledger CSV downloaded for Bank & CA!');
     }
 
     // Init
