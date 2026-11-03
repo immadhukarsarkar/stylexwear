@@ -1,0 +1,13 @@
+{
+  "name": "rareu-streetwear",
+  "version": "1.0.0",
+  "description": "StyleXWear / RareU Streetwear",
+  "main": "sync_products.js",
+  "scripts": {
+    "sync": "node sync_products.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "razorpay": "^2.9.2"
+  }
+}
