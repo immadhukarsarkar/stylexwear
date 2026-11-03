@@ -26,6 +26,14 @@ document.addEventListener('DOMContentLoaded', () => {
     localStorage.setItem('StyleXWear_activeReferrer', refParam);
     console.log('[Referral Tracker] Active referrer set to:', refParam);
   }
+
+  // Dynamic Announcement Marquee
+  const storedAnnouncement = localStorage.getItem('StyleXWear_announcementText');
+  if (storedAnnouncement) {
+    document.querySelectorAll('.marquee-text').forEach(el => {
+      el.textContent = storedAnnouncement;
+    });
+  }
   
   // 1. Dynamic Products Rendering on Homepage
   initHomepageProducts();
