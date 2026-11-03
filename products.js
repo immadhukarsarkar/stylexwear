@@ -91,11 +91,11 @@
     "category": "New Arrivals",
     "description": "Premium French Terry oversized tee featuring the 'Reborn' graphic print. Heavyduty 260 GSM fabric, ribbed crewneck, drop shoulders, and double-needle stitching for a premium, structured streetwear fit. Made with 100% premium cotton.",
     "images": [
-      "https://stylexwear.shop/cdn/shop/files/ChatGPTImageJun30_2026_03_35_19PM.png?v=1782925560&width=800",
-      "https://stylexwear.shop/cdn/shop/files/ChatGPTImageJun30_2026_03_52_52PM.png?v=1782925650&width=800",
-      "https://stylexwear.shop/cdn/shop/files/ChatGPTImageJun30_2026_03_33_20PM.png?v=1782925560&width=800",
-      "https://stylexwear.shop/cdn/shop/files/ChatGPTImageJun30_2026_03_37_16PM.png?v=1782925560&width=800",
-      "https://stylexwear.shop/cdn/shop/files/ChatGPTImageJun30_2026_03_47_26PM.png?v=1782925560&width=800"
+      "https://rareu.in/cdn/shop/files/ChatGPTImageJun30_2026_03_35_19PM.png?v=1782925560&width=800",
+      "https://rareu.in/cdn/shop/files/ChatGPTImageJun30_2026_03_52_52PM.png?v=1782925650&width=800",
+      "https://rareu.in/cdn/shop/files/ChatGPTImageJun30_2026_03_33_20PM.png?v=1782925560&width=800",
+      "https://rareu.in/cdn/shop/files/ChatGPTImageJun30_2026_03_37_16PM.png?v=1782925560&width=800",
+      "https://rareu.in/cdn/shop/files/ChatGPTImageJun30_2026_03_47_26PM.png?v=1782925560&width=800"
     ]
   },
   {
@@ -110,11 +110,11 @@
     "category": "Oversized Tees",
     "description": "Heavyweight Cotton Lycra Spandex oversized tee in a rich wine colorway, displaying custom 'Samurai' artwork on the back. Premium 250 GSM stretch fabric ensures ultimate comfort and structure. Perfect for a premium streetwear look.",
     "images": [
-      "https://stylexwear.shop/cdn/shop/files/ChatGPTImageJun30_2026_04_02_06PM.png?v=1782889202&width=800",
-      "https://stylexwear.shop/cdn/shop/files/ChatGPTImageJun30_2026_04_08_05PM.png?v=1782889202&width=800",
-      "https://stylexwear.shop/cdn/shop/files/ChatGPTImageJun30_2026_04_05_36PM.png?v=1782889202&width=800",
-      "https://stylexwear.shop/cdn/shop/files/ChatGPTImageJun30_2026_04_13_23PM.png?v=1782889202&width=800",
-      "https://stylexwear.shop/cdn/shop/files/ChatGPTImageJun30_2026_04_13_26PM.png?v=1782889203&width=800"
+      "https://rareu.in/cdn/shop/files/ChatGPTImageJun30_2026_04_02_06PM.png?v=1782889202&width=800",
+      "https://rareu.in/cdn/shop/files/ChatGPTImageJun30_2026_04_08_05PM.png?v=1782889202&width=800",
+      "https://rareu.in/cdn/shop/files/ChatGPTImageJun30_2026_04_05_36PM.png?v=1782889202&width=800",
+      "https://rareu.in/cdn/shop/files/ChatGPTImageJun30_2026_04_13_23PM.png?v=1782889202&width=800",
+      "https://rareu.in/cdn/shop/files/ChatGPTImageJun30_2026_04_13_26PM.png?v=1782889203&width=800"
     ]
   },
   {
@@ -129,11 +129,11 @@
     "category": "Oversized Tees",
     "description": "Crafted from heavy 260 GSM French Terry, the Zen Warrior Tee features a minimalist aesthetic combined with bold traditional calligraphy print. Features drop shoulders, relaxed sleeves, and premium stitching.",
     "images": [
-      "https://stylexwear.shop/cdn/shop/files/ChatGPTImageJun30_2026_04_27_02PM.png?v=1782886275&width=800",
-      "https://stylexwear.shop/cdn/shop/files/ChatGPTImageJun30_2026_04_53_25PM.png?v=1782886275&width=800",
-      "https://stylexwear.shop/cdn/shop/files/BACKC1_7d3a3f41-fce7-4c6b-a79e-41e8c0707cae.png?v=1775392458&width=800",
-      "https://stylexwear.shop/cdn/shop/files/ChatGPTImageJun30_2026_04_56_20PM.png?v=1782886275&width=800",
-      "https://stylexwear.shop/cdn/shop/files/ChatGPTImageJun30_2026_04_32_52PM.png?v=1782886275&width=800"
+      "https://rareu.in/cdn/shop/files/ChatGPTImageJun30_2026_04_27_02PM.png?v=1782886275&width=800",
+      "https://rareu.in/cdn/shop/files/ChatGPTImageJun30_2026_04_53_25PM.png?v=1782886275&width=800",
+      "https://rareu.in/cdn/shop/files/BACKC1_7d3a3f41-fce7-4c6b-a79e-41e8c0707cae.png?v=1775392458&width=800",
+      "https://rareu.in/cdn/shop/files/ChatGPTImageJun30_2026_04_56_20PM.png?v=1782886275&width=800",
+      "https://rareu.in/cdn/shop/files/ChatGPTImageJun30_2026_04_32_52PM.png?v=1782886275&width=800"
     ]
   },
   {
@@ -148,11 +148,11 @@
     "category": "The Mythical Beasts",
     "description": "Part of our special 'Mythical Beasts' capsule, this tee represents the eternal ascent of Mt. Kailash. High-definition screenprint on premium 260 GSM French Terry fabric. Designed for a comfortable oversized fit.",
     "images": [
-      "https://stylexwear.shop/cdn/shop/files/ChatGPTImageJun30_2026_05_09_22PM.png?v=1782886418&width=800",
-      "https://stylexwear.shop/cdn/shop/files/ChatGPTImageJun30_2026_05_11_32PM.png?v=1782886418&width=800",
-      "https://stylexwear.shop/cdn/shop/files/ChatGPTImageJun30_2026_05_24_16PM.png?v=1782886418&width=800",
-      "https://stylexwear.shop/cdn/shop/files/ChatGPTImageJun30_2026_05_26_30PM.png?v=1782886418&width=800",
-      "https://stylexwear.shop/cdn/shop/files/ChatGPTImageJun30_2026_05_29_16PM.png?v=1782886418&width=800"
+      "https://rareu.in/cdn/shop/files/ChatGPTImageJun30_2026_05_09_22PM.png?v=1782886418&width=800",
+      "https://rareu.in/cdn/shop/files/ChatGPTImageJun30_2026_05_11_32PM.png?v=1782886418&width=800",
+      "https://rareu.in/cdn/shop/files/ChatGPTImageJun30_2026_05_24_16PM.png?v=1782886418&width=800",
+      "https://rareu.in/cdn/shop/files/ChatGPTImageJun30_2026_05_26_30PM.png?v=1782886418&width=800",
+      "https://rareu.in/cdn/shop/files/ChatGPTImageJun30_2026_05_29_16PM.png?v=1782886418&width=800"
     ]
   },
   {
@@ -167,11 +167,11 @@
     "category": "Oversized Tees",
     "description": "Unique custom acid-wash design featuring the 'X of Hearts' emblem. Features heavy distressing texture, relaxed fit, drop shoulders, and super soft premium cotton blend fabric (260 GSM). Each piece is uniquely dyed.",
     "images": [
-      "https://stylexwear.shop/cdn/shop/files/ChatGPTImageJun30_2026_05_39_15PM.png?v=1782888938&width=800",
-      "https://stylexwear.shop/cdn/shop/files/ChatGPTImageJun30_2026_05_47_39PM.png?v=1782888938&width=800",
-      "https://stylexwear.shop/cdn/shop/files/ChatGPTImageJun30_2026_05_41_43PM.png?v=1782888938&width=800",
-      "https://stylexwear.shop/cdn/shop/files/ChatGPTImageJun30_2026_05_51_31PM.png?v=1782888938&width=800",
-      "https://stylexwear.shop/cdn/shop/files/ChatGPTImageJun30_2026_05_49_38PM.png?v=1782888937&width=800"
+      "https://rareu.in/cdn/shop/files/ChatGPTImageJun30_2026_05_39_15PM.png?v=1782888938&width=800",
+      "https://rareu.in/cdn/shop/files/ChatGPTImageJun30_2026_05_47_39PM.png?v=1782888938&width=800",
+      "https://rareu.in/cdn/shop/files/ChatGPTImageJun30_2026_05_41_43PM.png?v=1782888938&width=800",
+      "https://rareu.in/cdn/shop/files/ChatGPTImageJun30_2026_05_51_31PM.png?v=1782888938&width=800",
+      "https://rareu.in/cdn/shop/files/ChatGPTImageJun30_2026_05_49_38PM.png?v=1782888937&width=800"
     ]
   },
   {
@@ -186,11 +186,11 @@
     "category": "Oversized Tees",
     "description": "Interlock Oversized White T-shirt with dynamic typographic prints. Crafted from 250 GSM premium cotton stretch fabric for structured drapes and standard long-lasting wear. Minimalist front and heavy-graphic back details.",
     "images": [
-      "https://stylexwear.shop/cdn/shop/files/ChatGPTImageJun30_2026_07_42_55PM.png?v=1782910063&width=800",
-      "https://stylexwear.shop/cdn/shop/files/ChatGPTImageJun30_2026_07_52_45PM.png?v=1782910062&width=800",
-      "https://stylexwear.shop/cdn/shop/files/ChatGPTImageJun30_2026_07_50_28PM.png?v=1782910062&width=800",
-      "https://stylexwear.shop/cdn/shop/files/ChatGPTImageJun30_2026_07_54_52PM.png?v=1782910062&width=800",
-      "https://stylexwear.shop/cdn/shop/files/ChatGPTImageJun30_2026_07_46_30PM.png?v=1782910062&width=800"
+      "https://rareu.in/cdn/shop/files/ChatGPTImageJun30_2026_07_42_55PM.png?v=1782910063&width=800",
+      "https://rareu.in/cdn/shop/files/ChatGPTImageJun30_2026_07_52_45PM.png?v=1782910062&width=800",
+      "https://rareu.in/cdn/shop/files/ChatGPTImageJun30_2026_07_50_28PM.png?v=1782910062&width=800",
+      "https://rareu.in/cdn/shop/files/ChatGPTImageJun30_2026_07_54_52PM.png?v=1782910062&width=800",
+      "https://rareu.in/cdn/shop/files/ChatGPTImageJun30_2026_07_46_30PM.png?v=1782910062&width=800"
     ]
   },
   {
@@ -205,11 +205,11 @@
     "category": "New Arrivals",
     "description": "Embody the philosophy of spontaneity with the 'Live the Moment' graphic print. Heavyweight 260 GSM premium French Terry cotton, custom silhouette, drop shoulders, and relaxed sleeves.",
     "images": [
-      "https://stylexwear.shop/cdn/shop/files/ChatGPTImageJul1_2026_04_57_29PM.png?v=1782911597&width=800",
-      "https://stylexwear.shop/cdn/shop/files/ChatGPTImageJul1_2026_06_15_18PM.png?v=1782911597&width=800",
-      "https://stylexwear.shop/cdn/shop/files/ChatGPTImageJul1_2026_05_22_21PM.png?v=1782911597&width=800",
-      "https://stylexwear.shop/cdn/shop/files/ChatGPTImageJul1_2026_05_02_49PM.png?v=1782911596&width=800",
-      "https://stylexwear.shop/cdn/shop/files/ChatGPTImageJul1_2026_04_57_42PM.png?v=1782911596&width=800"
+      "https://rareu.in/cdn/shop/files/ChatGPTImageJul1_2026_04_57_29PM.png?v=1782911597&width=800",
+      "https://rareu.in/cdn/shop/files/ChatGPTImageJul1_2026_06_15_18PM.png?v=1782911597&width=800",
+      "https://rareu.in/cdn/shop/files/ChatGPTImageJul1_2026_05_22_21PM.png?v=1782911597&width=800",
+      "https://rareu.in/cdn/shop/files/ChatGPTImageJul1_2026_05_02_49PM.png?v=1782911596&width=800",
+      "https://rareu.in/cdn/shop/files/ChatGPTImageJul1_2026_04_57_42PM.png?v=1782911596&width=800"
     ]
   },
   {
@@ -224,11 +224,11 @@
     "category": "New Arrivals",
     "description": "An interstellar design featuring abstract stargaze prints on the back. Made from 250 GSM double-knit luxury cotton, giving it a structured drape and premium texture.",
     "images": [
-      "https://stylexwear.shop/cdn/shop/files/ChatGPTImageJun30_2026_09_02_27PM.png?v=1782886776&width=800",
-      "https://stylexwear.shop/cdn/shop/files/ChatGPTImageJun30_2026_09_08_19PM.png?v=1782886776&width=800",
-      "https://stylexwear.shop/cdn/shop/files/ChatGPTImageJun30_2026_08_56_54PM.png?v=1782886776&width=800",
-      "https://stylexwear.shop/cdn/shop/files/ChatGPTImageJun30_2026_09_11_55PM.png?v=1782886776&width=800",
-      "https://stylexwear.shop/cdn/shop/files/ChatGPTImageJun30_2026_09_15_47PM.png?v=1782886776&width=800"
+      "https://rareu.in/cdn/shop/files/ChatGPTImageJun30_2026_09_02_27PM.png?v=1782886776&width=800",
+      "https://rareu.in/cdn/shop/files/ChatGPTImageJun30_2026_09_08_19PM.png?v=1782886776&width=800",
+      "https://rareu.in/cdn/shop/files/ChatGPTImageJun30_2026_08_56_54PM.png?v=1782886776&width=800",
+      "https://rareu.in/cdn/shop/files/ChatGPTImageJun30_2026_09_11_55PM.png?v=1782886776&width=800",
+      "https://rareu.in/cdn/shop/files/ChatGPTImageJun30_2026_09_15_47PM.png?v=1782886776&width=800"
     ]
   },
   {
@@ -243,7 +243,7 @@
     "category": "POLOS",
     "description": "Premium knit polo collar shirt in a classic chocolate brown shade. Featuring high-grade waffle knit texture, premium ribbed collar, and dynamic chest drapes. Made with breathable eco-certified cotton yarn.",
     "images": [
-      "https://stylexwear.shop/cdn/shop/files/ChatGPTImageJul2_2026_12_14_35AM.png?v=1782931753&width=600"
+      "https://rareu.in/cdn/shop/files/ChatGPTImageJul2_2026_12_14_35AM.png?v=1782931753&width=600"
     ]
   },
   {
@@ -258,7 +258,7 @@
     "category": "POLOS",
     "description": "Luxurious light beige knit polo collar shirt with a fine textured waffle pattern. Designed with a clean zip/button-free placket and ribbed cuffs for a sleek, contemporary aesthetic.",
     "images": [
-      "https://stylexwear.shop/cdn/shop/files/ChatGPTImageJul2_2026_12_09_13AM.png?v=1782931171&width=600"
+      "https://rareu.in/cdn/shop/files/ChatGPTImageJul2_2026_12_09_13AM.png?v=1782931171&width=600"
     ]
   },
   {
@@ -273,7 +273,7 @@
     "category": "The SOLID WEAR",
     "description": "Ultra-minimalist black solid tee, designed for daily casual wear. Features a heavy drop shoulder styling, wide crew neck, and breathable heavyweight cotton for all-day comfort.",
     "images": [
-      "https://stylexwear.shop/cdn/shop/files/ChatGPTImageJul2_2026_01_00_27AM.png?v=1782934252&width=600"
+      "https://rareu.in/cdn/shop/files/ChatGPTImageJul2_2026_01_00_27AM.png?v=1782934252&width=600"
     ]
   },
   {
@@ -288,7 +288,7 @@
     "category": "Oversized Tees",
     "description": "Unisex classic oversized graphic t-shirt in washed grey, featuring the 'Stellar Drift' space artwork on the front panel. Heavyduty pre-shrunk cotton, comfy relaxed neckband.",
     "images": [
-      "https://stylexwear.shop/cdn/shop/files/ChatGPTImageJun30_2026_09_37_49PM.png?v=1782925795&width=600"
+      "https://rareu.in/cdn/shop/files/ChatGPTImageJun30_2026_09_37_49PM.png?v=1782925795&width=600"
     ]
   },
   {
@@ -303,7 +303,7 @@
     "category": "Oversized Tees",
     "description": "Limited-edition premium graphic print tshirt featuring the 'Born Free' artistic illustration. Boxy fit, 260 GSM interlock fabric, and premium wash treatment.",
     "images": [
-      "https://stylexwear.shop/cdn/shop/files/ChatGPTImageJul1_2026_11_16_11AM.png?v=1782888718&width=600"
+      "https://rareu.in/cdn/shop/files/ChatGPTImageJul1_2026_11_16_11AM.png?v=1782888718&width=600"
     ]
   }
 ];
@@ -347,50 +347,50 @@
 
   const baseImages = [
     [
-      "https://stylexwear.shop/cdn/shop/files/ChatGPTImageJun30_2026_03_35_19PM.png?v=1782925560&width=800",
-      "https://stylexwear.shop/cdn/shop/files/ChatGPTImageJun30_2026_03_52_52PM.png?v=1782925650&width=800"
+      "https://rareu.in/cdn/shop/files/ChatGPTImageJun30_2026_03_35_19PM.png?v=1782925560&width=800",
+      "https://rareu.in/cdn/shop/files/ChatGPTImageJun30_2026_03_52_52PM.png?v=1782925650&width=800"
     ],
     [
-      "https://stylexwear.shop/cdn/shop/files/ChatGPTImageJun30_2026_04_02_06PM.png?v=1782889202&width=800",
-      "https://stylexwear.shop/cdn/shop/files/ChatGPTImageJun30_2026_04_08_05PM.png?v=1782889202&width=800"
+      "https://rareu.in/cdn/shop/files/ChatGPTImageJun30_2026_04_02_06PM.png?v=1782889202&width=800",
+      "https://rareu.in/cdn/shop/files/ChatGPTImageJun30_2026_04_08_05PM.png?v=1782889202&width=800"
     ],
     [
-      "https://stylexwear.shop/cdn/shop/files/ChatGPTImageJun30_2026_04_27_02PM.png?v=1782886275&width=800",
-      "https://stylexwear.shop/cdn/shop/files/ChatGPTImageJun30_2026_04_53_25PM.png?v=1782886275&width=800"
+      "https://rareu.in/cdn/shop/files/ChatGPTImageJun30_2026_04_27_02PM.png?v=1782886275&width=800",
+      "https://rareu.in/cdn/shop/files/ChatGPTImageJun30_2026_04_53_25PM.png?v=1782886275&width=800"
     ],
     [
-      "https://stylexwear.shop/cdn/shop/files/ChatGPTImageJun30_2026_05_09_22PM.png?v=1782886418&width=800",
-      "https://stylexwear.shop/cdn/shop/files/ChatGPTImageJun30_2026_05_11_32PM.png?v=1782886418&width=800"
+      "https://rareu.in/cdn/shop/files/ChatGPTImageJun30_2026_05_09_22PM.png?v=1782886418&width=800",
+      "https://rareu.in/cdn/shop/files/ChatGPTImageJun30_2026_05_11_32PM.png?v=1782886418&width=800"
     ],
     [
-      "https://stylexwear.shop/cdn/shop/files/ChatGPTImageJun30_2026_05_39_15PM.png?v=1782888938&width=800",
-      "https://stylexwear.shop/cdn/shop/files/ChatGPTImageJun30_2026_05_47_39PM.png?v=1782888938&width=800"
+      "https://rareu.in/cdn/shop/files/ChatGPTImageJun30_2026_05_39_15PM.png?v=1782888938&width=800",
+      "https://rareu.in/cdn/shop/files/ChatGPTImageJun30_2026_05_47_39PM.png?v=1782888938&width=800"
     ],
     [
-      "https://stylexwear.shop/cdn/shop/files/ChatGPTImageJun30_2026_07_42_55PM.png?v=1782910063&width=800",
-      "https://stylexwear.shop/cdn/shop/files/ChatGPTImageJun30_2026_07_52_45PM.png?v=1782910062&width=800"
+      "https://rareu.in/cdn/shop/files/ChatGPTImageJun30_2026_07_42_55PM.png?v=1782910063&width=800",
+      "https://rareu.in/cdn/shop/files/ChatGPTImageJun30_2026_07_52_45PM.png?v=1782910062&width=800"
     ],
     [
-      "https://stylexwear.shop/cdn/shop/files/ChatGPTImageJul1_2026_04_57_29PM.png?v=1782911597&width=800",
-      "https://stylexwear.shop/cdn/shop/files/ChatGPTImageJul1_2026_06_15_18PM.png?v=1782911597&width=800"
+      "https://rareu.in/cdn/shop/files/ChatGPTImageJul1_2026_04_57_29PM.png?v=1782911597&width=800",
+      "https://rareu.in/cdn/shop/files/ChatGPTImageJul1_2026_06_15_18PM.png?v=1782911597&width=800"
     ],
     [
-      "https://stylexwear.shop/cdn/shop/files/ChatGPTImageJun30_2026_09_02_27PM.png?v=1782886776&width=800"
+      "https://rareu.in/cdn/shop/files/ChatGPTImageJun30_2026_09_02_27PM.png?v=1782886776&width=800"
     ],
     [
-      "https://stylexwear.shop/cdn/shop/files/ChatGPTImageJul2_2026_12_14_35AM.png?v=1782931753&width=600"
+      "https://rareu.in/cdn/shop/files/ChatGPTImageJul2_2026_12_14_35AM.png?v=1782931753&width=600"
     ],
     [
-      "https://stylexwear.shop/cdn/shop/files/ChatGPTImageJul2_2026_12_09_13AM.png?v=1782931171&width=600"
+      "https://rareu.in/cdn/shop/files/ChatGPTImageJul2_2026_12_09_13AM.png?v=1782931171&width=600"
     ],
     [
-      "https://stylexwear.shop/cdn/shop/files/ChatGPTImageJul2_2026_01_00_27AM.png?v=1782934252&width=600"
+      "https://rareu.in/cdn/shop/files/ChatGPTImageJul2_2026_01_00_27AM.png?v=1782934252&width=600"
     ],
     [
-      "https://stylexwear.shop/cdn/shop/files/ChatGPTImageJun30_2026_09_37_49PM.png?v=1782925795&width=600"
+      "https://rareu.in/cdn/shop/files/ChatGPTImageJun30_2026_09_37_49PM.png?v=1782925795&width=600"
     ],
     [
-      "https://stylexwear.shop/cdn/shop/files/ChatGPTImageJul1_2026_11_16_11AM.png?v=1782888718&width=600"
+      "https://rareu.in/cdn/shop/files/ChatGPTImageJul1_2026_11_16_11AM.png?v=1782888718&width=600"
     ]
   ];
 
