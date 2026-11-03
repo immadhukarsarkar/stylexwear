@@ -2286,6 +2286,11 @@ function initQikinkCheckout() {
         const newOrder = {
           orderId: orderId,
           userRef: userRef,
+          customerName: customerName,
+          customerPhone: customerPhone,
+          shippingAddress: `${customerAddr}, ${customerCity}, ${customerState} - ${customerPin}`,
+          paymentMethod: isCodOwner ? 'Delivery by Owner' : (isStandardCod ? 'Cash on Delivery (COD)' : 'Prepaid (Online)'),
+          totalPayable: total,
           status: 'In Transit',
           date: new Date().toLocaleDateString() + ' ' + new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}),
           subtotal: cartTotal,
