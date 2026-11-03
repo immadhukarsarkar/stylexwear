@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>2FA & Staff Manager · StyleXWear</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #050508;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 100vh;
+      margin: 0;
+      flex-direction: column;
+      gap: 20px;
+      padding: 40px 20px;
+      box-sizing: border-box;
+    }
+    h2 {
+      font-size: 1.6rem;
+      margin: 0;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+    p {
+      color: rgba(255, 255, 255, 0.4);
+      font-size: 0.9rem;
+      text-align: center;
+      max-width: 440px;
+      margin: 0 0 10px 0;
+      line-height: 1.4;
+    }
+    .card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      padding: 24px;
+      width: 100%;
+      max-width: 500px;
+      box-sizing: border-box;
+    }
+    .btn {
+      padding: 12px 24px;
+      border-radius: 12px;
+      border: none;
+      font-size: 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: inherit;
+    }
+    .red { background: #ff453a; color: #fff; }
+    .blue { background: #0a84ff; color: #fff; }
+    .green { background: #30d158; color: #fff; width: 100%; max-width: 500px; margin-top: 10px; }
+    .btn:hover { filter: brightness(1.15); transform: translateY(-1px); }
+    .btn:active { transform: translateY(0); }
+    
+    #status {
+      font-size: 0.88rem;
+      color: #30d158;
+      min-height: 20px;
+      font-weight: 600;
+      text-align: center;
+    }
+
+    .section-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+      color: #fff;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      padding-bottom: 8px;
+    }
+
+    .staff-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+      font-size: 0.85rem;
+    }
+    .staff-table th, .staff-table td {
+      padding: 10px;
+      text-align: left;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    .staff-table th {
+      color: rgba(255, 255, 255, 0.4);
+      font-weight: 600;
+    }
+    .badge {
+      display: inline-block;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 0.7rem;
+      font-weight: 700;
+    }
+    .badge.active { background: rgba(48, 209, 88, 0.15); color: #30d158; }
+    .badge.pending { background: rgba(255, 69, 58, 0.15); color: #ff453a; }
+
+    .action-link {
+      color: #ff453a;
+      text-decoration: none;
+      font-weight: 600;
+      cursor: pointer;
+      margin-right: 10px;
+    }
+    .action-link.blue-link {
+      color: #0a84ff;
+    }
+
+    .quick-create-form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 15px;
+    }
+    .input-field {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      padding: 8px 12px;
+      color: #fff;
+      font-size: 0.85rem;
+      outline: none;
+    }
+    .input-field:focus {
+      border-color: #0a84ff;
+    }
+  </style>
+</head>
+<body>
+  <h2>🔐 2FA & Staff Diagnostics</h2>
+  <p>Agar login karne me problem ho rahi hai, to yahan se credentials check karein ya Reset karein.</p>
+  
+  <div id="status"></div>
+
+  <!-- Section 1: Quick Actions -->
+  <div class="card">
+    <div class="section-title">Quick 2FA Resets</div>
+    <div style="display: flex; gap: 12px; justify-content: stretch;">
+      <button class="btn red" style="flex: 1;" onclick="resetAdmin()">🔄 Reset Admin 2FA</button>
+      <button class="btn blue" style="flex: 1;" onclick="resetAllStaff()">🔄 Reset Staff 2FA</button>
+    </div>
+  </div>
+
+  <!-- Section 2: Manage Staff Accounts -->
+  <div class="card">
+    <div class="section-title">Stored Staff Accounts</div>
+    <div style="overflow-x: auto;">
+      <table class="staff-table">
+        <thead>
+          <tr>
+            <th>Username</th>
+            <th>Password</th>
+            <th>2FA State</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="staff-list-body">
+          <!-- Populated by JS -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Section 3: Quick Create Staff -->
+  <div class="card">
+    <div class="section-title">Quick Create Staff Account</div>
+    <div class="quick-create-form">
+      <input type="text" id="quick-uname" class="input-field" placeholder="Username">
+      <input type="text" id="quick-pwd" class="input-field" placeholder="Password">
+      <button class="btn blue" onclick="quickCreateStaff()" style="padding: 8px 16px; font-size: 0.85rem;">➕ Create Staff Account</button>
+    </div>
+  </div>
+
+  <button class="btn green" onclick="goHome()">← Back to Storefront (index.html)</button>
+
+  <script>
+    var s = document.getElementById('status');
+
+    function showStatus(msg, isError = false) {
+      s.textContent = msg;
+      s.style.color = isError ? '#ff453a' : '#30d158';
+      setTimeout(function() { s.textContent = ''; }, 4000);
+    }
+
+    function resetAdmin() {
+      localStorage.removeItem('StyleXWear_adminTOTP');
+      showStatus('✅ Admin 2FA reset successful! Scan new QR on next login.');
+    }
+
+    function resetAllStaff() {
+      var list = JSON.parse(localStorage.getItem('StyleXWear_staff') || '[]');
+      list.forEach(function(u){ u.totp_secret = null; });
+      localStorage.setItem('StyleXWear_staff', JSON.stringify(list));
+      showStatus('✅ All staff 2FA reset successfully.');
+      loadStaff();
+    }
+
+    function loadStaff() {
+      var list = JSON.parse(localStorage.getItem('StyleXWear_staff') || '[]');
+      var tbody = document.getElementById('staff-list-body');
+      if (list.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="4" style="text-align: center; color: rgba(255,255,255,0.3);">No staff accounts found in this browser\'s LocalStorage.</td></tr>';
+        return;
+      }
+      tbody.innerHTML = list.map(function(item, idx) {
+        var badgeClass = item.totp_secret ? 'active' : 'pending';
+        var badgeText = item.totp_secret ? 'Active' : 'Pending';
+        return `
+          <tr>
+            <td style="font-weight: 700; color: #fff;">${escapeHTML(item.username)}</td>
+            <td style="font-family: monospace;">${escapeHTML(item.password)}</td>
+            <td><span class="badge ${badgeClass}">${badgeText}</span></td>
+            <td>
+              <span class="action-link blue-link" onclick="resetSingleStaff(${idx})">Reset 2FA</span>
+              <span class="action-link" onclick="deleteStaff(${idx})">Delete</span>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    function resetSingleStaff(idx) {
+      var list = JSON.parse(localStorage.getItem('StyleXWear_staff') || '[]');
+      if (list[idx]) {
+        list[idx].totp_secret = null;
+        localStorage.setItem('StyleXWear_staff', JSON.stringify(list));
+        showStatus(`✅ 2FA secret reset for staff "${list[idx].username}"`);
+        loadStaff();
+      }
+    }
+
+    function deleteStaff(idx) {
+      var list = JSON.parse(localStorage.getItem('StyleXWear_staff') || '[]');
+      if (list[idx]) {
+        var name = list[idx].username;
+        if (confirm(`Are you sure you want to delete staff account "${name}"?`)) {
+          list.splice(idx, 1);
+          localStorage.setItem('StyleXWear_staff', JSON.stringify(list));
+          showStatus(`❌ Staff "${name}" deleted.`);
+          loadStaff();
+        }
+      }
+    }
+
+    function quickCreateStaff() {
+      var uname = document.getElementById('quick-uname').value.trim();
+      var pwd = document.getElementById('quick-pwd').value.trim();
+      if (!uname || !pwd) {
+        showStatus('⚠️ Username and Password are required!', true);
+        return;
+      }
+      var list = JSON.parse(localStorage.getItem('StyleXWear_staff') || '[]');
+      if (list.some(function(item) { return item.username.toLowerCase() === uname.toLowerCase(); })) {
+        showStatus('⚠️ Username already exists!', true);
+        return;
+      }
+      list.push({ username: uname, password: pwd, totp_secret: null });
+      localStorage.setItem('StyleXWear_staff', JSON.stringify(list));
+      document.getElementById('quick-uname').value = '';
+      document.getElementById('quick-pwd').value = '';
+      showStatus(`✅ Staff account "${uname}" created successfully.`);
+      loadStaff();
+    }
+
+    function escapeHTML(str) {
+      if (!str) return '';
+      return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+
+    function goHome() { window.location.href = 'index.html'; }
+
+    // Initialize
+    loadStaff();
+  </script>
+</body>
+</html>
