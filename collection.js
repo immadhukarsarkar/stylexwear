@@ -20,6 +20,20 @@ document.addEventListener('DOMContentLoaded', () => {
   try { updateWishlistUI(); } catch (e) { console.error('Error in updateWishlistUI:', e); }
   try { initSearch(); } catch (e) { console.error('Error in initSearch:', e); }
   try { initMobileDrawerPanels(); } catch (e) { console.error('Error in initMobileDrawerPanels:', e); }
+
+  // Zero-Delay Realtime Cloud Catalog updates
+  window.addEventListener('stylexwear:products-updated', () => {
+    try {
+      const grid = document.getElementById('collection-grid');
+      if (grid) {
+        grid.innerHTML = '';
+        displayedCount = 0;
+        initCollectionPage();
+      }
+    } catch (e) {
+      console.error('Error re-rendering collection:', e);
+    }
+  });
 });
 
 // Global state for collection

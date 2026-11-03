@@ -69,6 +69,12 @@ document.addEventListener('DOMContentLoaded', () => {
   
   // 11. Mobile Drawer Navigation Panels
   initMobileDrawerPanels();
+
+  // 12. Real-time Cloud Catalog Updates (Zero Delay)
+  window.addEventListener('stylexwear:products-updated', () => {
+    initHomepageProducts();
+    if (typeof feather !== 'undefined') feather.replace();
+  });
 });
 
 /* -------------------------------------------------------------
@@ -2320,6 +2326,14 @@ function initQikinkCheckout() {
         const savedOrders = JSON.parse(localStorage.getItem('StyleXWear_orders') || '[]');
         savedOrders.push(newOrder);
         localStorage.setItem('StyleXWear_orders', JSON.stringify(savedOrders));
+
+        // Zero-Delay Realtime Sync to Firebase Database
+        const fbUrl = window.FIREBASE_DB_URL || 'https://stylexwear-5ed64-default-rtdb.firebaseio.com';
+        fetch(`${fbUrl}/orders/${orderId}.json`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(newOrder)
+        }).catch(err => console.warn('Firebase order sync error:', err));
 
         // Log to Audit Logs
         const actor = currentUser ? `${currentUser.name} (${currentUser.email || currentUser.phone})` : 'Guest';

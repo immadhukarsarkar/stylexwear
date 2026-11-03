@@ -308,54 +308,65 @@ const PRODUCTS = [
   }
 ];
 
-// Apply dynamic product overrides on load
-(function() {
-  try {
-    if (typeof localStorage === 'undefined') return;
-    const overrides = JSON.parse(localStorage.getItem('StyleXWear_productOverrides') || '{}');
-    if (overrides) {
-      PRODUCTS.forEach(prod => {
-        if (overrides[prod.title]) {
-          const parsedVal = parseFloat(overrides[prod.title]);
-          if (!isNaN(parsedVal)) {
-            prod.price = "₹" + Math.round(parsedVal).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-          }
-        }
-      });
-    }
-  } catch(e) {
-    console.error('Error applying product overrides:', e);
-  }
-})();
+window.FIREBASE_DB_URL = 'https://stylexwear-5ed64-default-rtdb.firebaseio.com';
 
-// Sync full custom products list from Master Admin Console if configured
-(function() {
+// ── REALTIME CLOUD DATABASE ENGINE (ZERO DELAY) ──
+(function initRealtimeCatalog() {
+  if (typeof window === 'undefined') return;
+
+  function applyProducts(list) {
+    if (!list) return;
+    let clean = [];
+    if (Array.isArray(list)) {
+      clean = list.filter(Boolean);
+    } else if (typeof list === 'object') {
+      clean = Object.values(list).filter(Boolean);
+    }
+    if (clean.length === 0) return;
+    PRODUCTS.length = 0;
+    clean.forEach(p => PRODUCTS.push(p));
+    try {
+      localStorage.setItem('StyleXWear_cachedProducts', JSON.stringify(clean));
+    } catch(e) {}
+    window.dispatchEvent(new CustomEvent('stylexwear:products-updated', { detail: PRODUCTS }));
+  }
+
+  // 1. Instant cache load if available
   try {
-    if (typeof localStorage === 'undefined') return;
-    const custom = localStorage.getItem('StyleXWear_customProducts');
-    if (custom) {
-      const parsed = JSON.parse(custom);
-      if (Array.isArray(parsed) && parsed.length > 0) {
-        // If stored custom products contains the old bloated dummy catalog (> 50 items), clear it
-        if (parsed.length > 50) {
-          localStorage.removeItem('StyleXWear_customProducts');
-          return;
-        }
-        // Deduplicate by title to ensure clean catalog
-        const seen = new Set();
-        const unique = [];
-        parsed.forEach(p => {
-          const key = (p.title || '').trim().toLowerCase();
-          if (key && !seen.has(key)) {
-            seen.add(key);
-            unique.push(p);
-          }
-        });
-        PRODUCTS.length = 0;
-        unique.forEach(p => PRODUCTS.push(p));
+    const cached = localStorage.getItem('StyleXWear_cachedProducts');
+    if (cached) {
+      const parsed = JSON.parse(cached);
+      if (Array.isArray(parsed) && parsed.length > 0 && parsed.length <= 50) {
+        applyProducts(parsed);
       }
     }
-  } catch(e) {
-    console.error('Error applying custom products:', e);
-  }
+  } catch(e) {}
+
+  // 2. High-speed zero-delay cloud fetch (bypasses browser cache via ?t=)
+  fetch(`${window.FIREBASE_DB_URL}/products.json?t=${Date.now()}`)
+    .then(res => res.json())
+    .then(data => {
+      applyProducts(data);
+    })
+    .catch(err => console.warn('Firebase sync notice:', err));
+
+  // 3. Realtime SSE listener for instant live updates across all devices
+  try {
+    if (typeof EventSource !== 'undefined') {
+      const sse = new EventSource(`${window.FIREBASE_DB_URL}/products.json`);
+      sse.addEventListener('put', (e) => {
+        try {
+          const payload = JSON.parse(e.data);
+          if (payload && payload.path === '/') {
+            applyProducts(payload.data);
+          } else {
+            // Sub-path or granular update
+            fetch(`${window.FIREBASE_DB_URL}/products.json?t=${Date.now()}`)
+              .then(res => res.json())
+              .then(data => applyProducts(data));
+          }
+        } catch(err) {}
+      });
+    }
+  } catch(e) {}
 })();

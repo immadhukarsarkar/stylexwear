@@ -2418,6 +2418,9 @@
     } else {
       initProductDetails();
     }
+    window.addEventListener('stylexwear:products-updated', () => {
+      try { initProductDetails(); } catch(e) {}
+    });
 
     function renderProductBundle(currentProduct) {
       const listEl = document.getElementById('bundle-products-list');
