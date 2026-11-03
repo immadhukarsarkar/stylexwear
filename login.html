@@ -672,7 +672,7 @@
 
   <script>
     (function() {
-      const ADMIN_URL = '_x9mq.html';
+      const ADMIN_URL = 'admin.html';
       const STAFF_URL = '_staff.html';
       const PASSKEY   = 'stylexadmin123';
 
@@ -865,33 +865,15 @@
         }
       };
 
-      // ── ADMIN PASSWORD-BASED 2FA FLOW ──
+      // ── ADMIN PASSWORD-BASED FLOW ──
       function checkAdminPasskey() {
         const val = adminInput.value.trim();
         if (val !== PASSKEY) {
           adminErr.style.display = 'block'; return;
         }
         adminErr.style.display = 'none';
-        
-        const registeredAdminSecret = localStorage.getItem('StyleXWear_admin_totp_secret');
-        if (!registeredAdminSecret) {
-          hideAll();
-          adminTotpSetupState.style.display = 'block';
-          adminTotpSetupErr.style.display = 'none';
-          adminTotpSetupInput.value = '';
-          pendingAdminSecret = generateSecret();
-          adminManualSecret.textContent = pendingAdminSecret;
-          const uri = buildOtpAuthURI('AdminConsole', pendingAdminSecret);
-          setTimeout(() => renderQR(adminQrContainer, uri), 80);
-          setTimeout(() => adminTotpSetupInput.focus(), 150);
-        } else {
-          hideAll();
-          adminTotpVerifyState.style.display = 'block';
-          adminTotpError.style.display = 'none';
-          adminTotpInput.value = '';
-          startAdminTotpTimer();
-          setTimeout(() => adminTotpInput.focus(), 150);
-        }
+        sessionStorage.setItem('StyleXWear_adminSession', 'active');
+        window.location.replace(ADMIN_URL);
       }
       document.getElementById('admin-passkey-submit').addEventListener('click', checkAdminPasskey);
       adminInput.addEventListener('keydown', (e) => { if(e.key === 'Enter') checkAdminPasskey(); });
