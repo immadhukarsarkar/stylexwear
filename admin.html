@@ -2504,7 +2504,7 @@
       const genEl = document.getElementById('stmt-disp-generated');
       if (genEl) genEl.textContent = new Date().toLocaleDateString('en-IN', { day:'2-digit', month:'short', year:'numeric', hour:'2-digit', minute:'2-digit' }) + ' IST';
 
-      const sumGrossEl = document.getElementById('stmt-sum-gross');
+      const sumGrossEl = document.getElementById('stmt-sum-gross'); const repEl = document.getElementById('stmt-sum-gross-repeat'); if (repEl) repEl.textContent = '₹' + totalGross.toLocaleString('en-IN', {minimumFractionDigits:2, maximumFractionDigits:2});
       if (sumGrossEl) sumGrossEl.textContent = '₹' + totalGross.toLocaleString('en-IN', {minimumFractionDigits:2, maximumFractionDigits:2});
 
       const sumCountEl = document.getElementById('stmt-sum-count');
@@ -2551,23 +2551,16 @@
         processedRows.forEach((row, idx) => {
           const tr = document.createElement('tr');
           tr.style.cssText = idx % 2 === 0 ? 'background:#ffffff; border-bottom:1px solid #e2e8f0;' : 'background:#f8fafc; border-bottom:1px solid #e2e8f0;';
-          tr.innerHTML = '<td style="padding:6px 5px; text-align:center; color:#64748b; font-size:9.5px; font-weight:600;">' + row.idx + '</td>' +
-            '<td style="padding:6px 6px; font-weight:600; color:#334155; font-size:9.5px; white-space:nowrap;">' + row.date + '</td>' +
-            '<td style="padding:6px 6px; font-weight:800; color:#0f172a; font-size:10px; white-space:nowrap;">' + row.custName + '</td>' +
-            '<td style="padding:6px 6px; font-weight:700; color:#0f172a; font-family:monospace; font-size:9.5px; white-space:nowrap;">' + row.custPhone + '</td>' +
-            '<td style="padding:6px 6px;">' +
-              '<div style="color:#1e293b; font-weight:600; font-size:9.5px;">' + row.itemTitle + '</div>' +
-              '<div style="font-size:8px; color:#059669; font-weight:700;">HSN: 6109 (5% GST)</div>' +
-            '</td>' +
-            '<td style="padding:6px 6px;">' +
-              '<span style="background:#ecfdf5; color:#065f46; border:1px solid #a7f3d0; padding:2px 5px; border-radius:4px; font-weight:800; font-family:monospace; font-size:9.5px; display:inline-block; letter-spacing:0.5px;">' +
-                row.rrn +
-              '</span>' +
-            '</td>' +
-            '<td style="padding:6px 6px; text-align:right; font-weight:600; color:#334155; font-size:9.5px;">₹' + row.taxable.toFixed(2) + '</td>' +
-            '<td style="padding:6px 6px; text-align:right; color:#475569; font-size:9px;">₹' + row.cgst.toFixed(2) + '</td>' +
-            '<td style="padding:6px 6px; text-align:right; color:#475569; font-size:9px;">₹' + row.sgst.toFixed(2) + '</td>' +
-            '<td style="padding:6px 6px; text-align:right; font-weight:900; color:#0f172a; font-size:10.5px;">₹' + row.amt.toFixed(2) + '</td>';
+          tr.innerHTML = '<td style="padding:4.5px 5px; text-align:center; color:#64748b; font-size:8.5px; border-bottom:1px solid #e5e7eb;">' + row.idx + '</td>' +
+            '<td style="padding:4.5px 6px; color:#334155; font-size:8.5px; white-space:nowrap; border-bottom:1px solid #e5e7eb;">' + row.date + '</td>' +
+            '<td style="padding:4.5px 6px; font-weight:700; color:#0f172a; font-size:9px; white-space:nowrap; border-bottom:1px solid #e5e7eb;">' + row.custName + '</td>' +
+            '<td style="padding:4.5px 6px; color:#334155; font-family:Consolas, monospace; font-size:8.5px; white-space:nowrap; border-bottom:1px solid #e5e7eb;">' + row.custPhone + '</td>' +
+            '<td style="padding:4.5px 6px; color:#1e293b; font-size:8.5px; border-bottom:1px solid #e5e7eb;">' + row.itemTitle + '</td>' +
+            '<td style="padding:4.5px 6px; font-weight:700; color:#0f172a; font-family:Consolas, monospace; font-size:8.5px; border-bottom:1px solid #e5e7eb;">' + row.rrn + '</td>' +
+            '<td style="padding:4.5px 6px; text-align:right; color:#334155; font-size:8.5px; font-family:Consolas, monospace; border-bottom:1px solid #e5e7eb;">₹' + row.taxable.toFixed(2) + '</td>' +
+            '<td style="padding:4.5px 6px; text-align:right; color:#475569; font-size:8.5px; font-family:Consolas, monospace; border-bottom:1px solid #e5e7eb;">₹' + row.cgst.toFixed(2) + '</td>' +
+            '<td style="padding:4.5px 6px; text-align:right; color:#475569; font-size:8.5px; font-family:Consolas, monospace; border-bottom:1px solid #e5e7eb;">₹' + row.sgst.toFixed(2) + '</td>' +
+            '<td style="padding:4.5px 6px; text-align:right; font-weight:700; color:#0f172a; font-size:9px; font-family:Consolas, monospace; border-bottom:1px solid #e5e7eb;">₹' + row.amt.toFixed(2) + '</td>';
           tbody.appendChild(tr);
         });
       }
@@ -2847,182 +2840,111 @@
       <!-- Scrollable Preview Area -->
       <div style="padding:24px; overflow-y:auto; flex:1; background:#0d0d0f;">
         <!-- STATEMENT SHEET (A4 / Printable) -->
-        <div id="statement-sheet" style="background:#ffffff; color:#0f172a; padding:32px 36px; border-radius:8px; font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size:11px; line-height:1.45; box-shadow:0 15px 50px rgba(0,0,0,0.5); max-width:1050px; margin:0 auto; border:1px solid #cbd5e1;">
+        <div id="statement-sheet" style="background:#ffffff; color:#0f172a; padding:28px 32px; border-radius:6px; font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; font-size:9.5px; line-height:1.4; border:1px solid #cbd5e1; box-shadow:0 10px 40px rgba(0,0,0,0.5); max-width:1050px; margin:0 auto;">
 
-          <!-- TOP EXECUTIVE BANNER -->
-          <div style="background:linear-gradient(135deg, #0b192c 0%, #1e293b 100%); color:#ffffff; padding:20px 24px; border-radius:6px; border-bottom:3px solid #d97706; margin-bottom:20px; box-shadow:0 4px 12px rgba(11,25,44,0.15);">
-            <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:16px;">
-              
-              <!-- Company Crest & Info -->
-              <div style="display:flex; align-items:flex-start; gap:16px;">
-                <div style="width:56px; height:56px; border-radius:8px; background:linear-gradient(135deg, #d97706, #f59e0b); display:flex; flex-direction:column; align-items:center; justify-content:center; box-shadow:0 4px 10px rgba(217,119,6,0.3); border:2px solid #ffffff; flex-shrink:0;">
-                  <span style="font-weight:900; font-size:16px; color:#ffffff; letter-spacing:1px; line-height:1;">SXW</span>
-                  <span style="font-size:7px; font-weight:800; color:#ffffff; letter-spacing:0.5px; margin-top:2px;">AUDIT</span>
-                </div>
-                <div>
-                  <div style="font-size:22px; font-weight:900; letter-spacing:1px; color:#ffffff; text-transform:uppercase;">STYLEXWEAR APPAREL</div>
-                  <div style="font-size:11.5px; font-weight:800; color:#fbbf24; letter-spacing:0.5px; text-transform:uppercase; margin-top:1px;">
-                    STATUTORY MERCHANT SETTLEMENT &amp; TAX AUDIT STATEMENT
-                  </div>
-                  <div style="font-size:10.5px; color:#cbd5e1; margin-top:4px;">
-                    Sole Proprietorship: <strong style="color:#ffffff;">Prahlad Kumar Prashant</strong> • Core HSN Code: <strong style="color:#ffffff;">6109</strong> (Knitted Ready-to-Wear Apparel)
-                  </div>
-                  <div style="font-size:10px; color:#94a3b8; margin-top:2px;">
-                    Digital Storefront: <a href="https://www.stylexwear.shop" target="_blank" style="color:#60a5fa; text-decoration:none; font-weight:700;">www.stylexwear.shop</a> • Business Email: support@stylexwear.shop
-                  </div>
-                </div>
-              </div>
-
-              <!-- Certificate Ref & Validation Pill -->
-              <div style="text-align:right;">
-                <div style="background:rgba(255,255,255,0.08); border:1px solid rgba(251,191,36,0.4); border-radius:6px; padding:8px 14px; display:inline-block; text-align:right;">
-                  <div style="font-size:9px; color:#fbbf24; font-weight:800; text-transform:uppercase; letter-spacing:0.5px;">OFFICIAL AUDIT REFERENCE</div>
-                  <div style="font-family:monospace; font-weight:900; font-size:12px; color:#ffffff; margin-top:1px;" id="stmt-disp-ref">STMT/SXW/20261104/84150</div>
-                  <div style="font-size:8.5px; color:#86efac; font-weight:800; margin-top:3px; display:flex; align-items:center; justify-content:flex-end; gap:4px;">
-                    <span style="display:inline-block; width:6px; height:6px; background:#22c55e; border-radius:50%;"></span>
-                    <span>CORE BANKING RRN: 100% RECONCILED</span>
-                  </div>
-                </div>
-                <div style="font-size:10px; color:#94a3b8; margin-top:6px;">
-                  Statement Scope: <span id="stmt-disp-period" style="font-weight:800; color:#ffffff;">28 Oct 2026 – 01 Nov 2026</span>
-                </div>
-                <div style="font-size:9.5px; color:#94a3b8;">
-                  Issued On: <span id="stmt-disp-generated" style="color:#e2e8f0; font-weight:600;">04 Nov 2026, 12:45 IST</span>
-                </div>
-              </div>
-
-            </div>
+          <!-- FORMAL CORPORATE HEADER -->
+          <div style="border-bottom:2px solid #0f172a; padding-bottom:12px; margin-bottom:14px;">
+            <table style="width:100%; border-collapse:collapse;">
+              <tr>
+                <td style="vertical-align:top; width:55%;">
+                  <div style="font-size:18px; font-weight:800; color:#0f172a; letter-spacing:0.5px;">STYLEXWEAR APPAREL</div>
+                  <div style="font-size:9.5px; color:#475569; margin-top:2px;">Proprietor: <strong>Prahlad Kumar Prashant</strong></div>
+                  <div style="font-size:9px; color:#64748b;">Retail Trade of Knitted Streetwear &amp; Ready-to-Wear Garments (HSN: <strong>6109</strong>)</div>
+                  <div style="font-size:9px; color:#64748b;">Online Storefront: <a href="https://www.stylexwear.shop" target="_blank" style="color:#0f172a; text-decoration:none; font-weight:600;">www.stylexwear.shop</a> • Email: support@stylexwear.shop</div>
+                </td>
+                <td style="vertical-align:top; text-align:right; width:45%;">
+                  <div style="font-size:13px; font-weight:800; color:#0f172a; text-transform:uppercase;">MERCHANT SETTLEMENT STATEMENT</div>
+                  <div style="font-size:9px; color:#475569; margin-top:2px;">Statement Ref: <strong style="font-family:Consolas, monospace;" id="stmt-disp-ref">STMT/SXW/202611-01</strong></div>
+                  <div style="font-size:9px; color:#475569;">Paytm Merchant ID (MID): <strong style="font-family:Consolas, monospace;">RQEBTF71660866068435</strong></div>
+                  <div style="font-size:9px; color:#475569;">POS Terminal ID: <strong style="font-family:Consolas, monospace;">PAYTM_POS</strong></div>
+                  <div style="font-size:9px; color:#0f172a; margin-top:2px;"><strong id="stmt-disp-period">Period: 28 Oct 2026 – 01 Nov 2026</strong> | <span id="stmt-disp-generated">04 Nov 2026</span></div>
+                </td>
+              </tr>
+            </table>
           </div>
 
-          <!-- DUAL STATUTORY IDENTITY & GATEWAY RECONCILIATION CARDS -->
-          <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:18px;">
-            <!-- Left: Taxpayer Entity KYC -->
-            <div style="background:#f8fafc; border:1px solid #e2e8f0; border-left:4px solid #0b192c; border-radius:6px; padding:12px 14px;">
-              <div style="font-size:10px; font-weight:900; color:#0b192c; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:6px; display:flex; align-items:center; gap:6px;">
-                <span>🏢 MERCHANT TAXPAYER &amp; TRADING PROFILE</span>
+          <!-- ACCOUNTING RECONCILIATION SUMMARY (Clean 2-Box Accounting Grid) -->
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:14px;">
+            
+            <!-- Summary Box 1: Settlement Ledger -->
+            <div style="border:1px solid #cbd5e1; border-radius:4px; background:#f8fafc; padding:8px 12px; font-size:9px;">
+              <div style="font-weight:700; font-size:9.5px; color:#0f172a; text-transform:uppercase; border-bottom:1px solid #cbd5e1; padding-bottom:4px; margin-bottom:6px;">
+                Settlement Reconciliation Summary
               </div>
-              <table style="width:100%; font-size:10px; line-height:1.5;">
+              <table style="width:100%; font-size:9px; border-collapse:collapse;">
                 <tr>
-                  <td style="color:#64748b; width:130px;">Trade Entity Name:</td>
-                  <td style="font-weight:800; color:#0f172a;">StyleXWear Apparel</td>
+                  <td style="color:#64748b; width:170px; padding:2px 0;">Total Verified Invoices:</td>
+                  <td style="font-weight:700; color:#0f172a;" id="stmt-sum-count">188 Orders (100% Settled)</td>
                 </tr>
                 <tr>
-                  <td style="color:#64748b;">Proprietor / Signatory:</td>
-                  <td style="font-weight:800; color:#0f172a;">Prahlad Kumar Prashant</td>
+                  <td style="color:#64748b; padding:2px 0;">Gross Bank Inflow:</td>
+                  <td style="font-weight:800; color:#0f172a; font-family:Consolas, monospace;" id="stmt-sum-gross">₹84,150.00</td>
                 </tr>
                 <tr>
-                  <td style="color:#64748b;">Core HSN &amp; Category:</td>
-                  <td style="font-weight:700; color:#0f172a;">6109 (Knitted Cotton Streetwear &amp; Apparel)</td>
+                  <td style="color:#64748b; padding:2px 0;">Net Settled to Bank Account:</td>
+                  <td style="font-weight:800; color:#0f172a; font-family:Consolas, monospace;" id="stmt-sum-gross-repeat">₹84,150.00</td>
                 </tr>
                 <tr>
-                  <td style="color:#64748b;">Applicable Tax Slab:</td>
-                  <td style="font-weight:700; color:#15803d;">5.00% (CGST 2.50% + SGST 2.50%)</td>
+                  <td style="color:#64748b; padding:2px 0;">Pending / Disputed Deductions:</td>
+                  <td style="font-weight:700; color:#16a34a;">₹0.00 (Zero Chargebacks)</td>
                 </tr>
                 <tr>
-                  <td style="color:#64748b;">Retail Domain:</td>
-                  <td style="font-weight:700; color:#2563eb;">https://www.stylexwear.shop</td>
+                  <td style="color:#64748b; padding:2px 0;">Settlement Mode:</td>
+                  <td style="font-weight:600; color:#0f172a;">IMPS/UPI Auto-Sweep into Linked Account</td>
                 </tr>
               </table>
             </div>
 
-            <!-- Right: Paytm Acquiring & Core Banking Specs -->
-            <div style="background:#f8fafc; border:1px solid #e2e8f0; border-left:4px solid #059669; border-radius:6px; padding:12px 14px;">
-              <div style="font-size:10px; font-weight:900; color:#065f46; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:6px; display:flex; align-items:center; gap:6px;">
-                <span>🏦 ACQUIRING GATEWAY &amp; CORE BANKING AUDIT</span>
+            <!-- Summary Box 2: GST & Core Banking Specs -->
+            <div style="border:1px solid #cbd5e1; border-radius:4px; background:#f8fafc; padding:8px 12px; font-size:9px;">
+              <div style="font-weight:700; font-size:9.5px; color:#0f172a; text-transform:uppercase; border-bottom:1px solid #cbd5e1; padding-bottom:4px; margin-bottom:6px;">
+                Tax &amp; Core Banking Audit Details
               </div>
-              <table style="width:100%; font-size:10px; line-height:1.5;">
+              <table style="width:100%; font-size:9px; border-collapse:collapse;">
                 <tr>
-                  <td style="color:#64748b; width:135px;">Acquiring Partner:</td>
-                  <td style="font-weight:800; color:#0f172a;">Paytm Payments Bank / One97 Comm.</td>
+                  <td style="color:#64748b; width:160px; padding:2px 0;">Taxable Turnover (Base):</td>
+                  <td style="font-weight:700; color:#0f172a; font-family:Consolas, monospace;" id="stmt-sum-taxable">₹80,142.86</td>
                 </tr>
                 <tr>
-                  <td style="color:#64748b;">Paytm Merchant ID (MID):</td>
-                  <td style="font-weight:900; font-family:monospace; color:#0f172a;">RQEBTF71660866068435</td>
+                  <td style="color:#64748b; padding:2px 0;">CGST Collected (2.5%):</td>
+                  <td style="font-weight:700; color:#0f172a; font-family:Consolas, monospace;" id="stmt-sum-cgst">₹2,003.57</td>
                 </tr>
                 <tr>
-                  <td style="color:#64748b;">Terminal / POS ID:</td>
-                  <td style="font-weight:800; font-family:monospace; color:#0f172a;">PAYTM_POS</td>
+                  <td style="color:#64748b; padding:2px 0;">SGST Collected (2.5%):</td>
+                  <td style="font-weight:700; color:#0f172a; font-family:Consolas, monospace;" id="stmt-sum-sgst">₹2,003.57</td>
                 </tr>
                 <tr>
-                  <td style="color:#64748b;">Settlement Route:</td>
-                  <td style="font-weight:700; color:#059669;">Direct IMPS/UPI Auto-Sweep to Linked Bank</td>
+                  <td style="color:#64748b; padding:2px 0;">Total GST (5.0% Composite):</td>
+                  <td style="font-weight:800; color:#0f172a; font-family:Consolas, monospace;" id="stmt-sum-tax">₹4,007.14</td>
                 </tr>
                 <tr>
-                  <td style="color:#64748b;">Chargeback / Dispute:</td>
-                  <td style="font-weight:800; color:#166534;">0.00% (Zero Reversals / 100% Settled)</td>
+                  <td style="color:#64748b; padding:2px 0;">Statutory Rule:</td>
+                  <td style="font-weight:600; color:#0f172a;">Rule-46 CGST Act &amp; Banking RRN Reconciliation</td>
                 </tr>
               </table>
             </div>
+
           </div>
 
-          <!-- EXECUTIVE FINANCIAL SUMMARY MATRIX (5 TILES) -->
-          <div style="display:grid; grid-template-columns:repeat(5, 1fr); gap:8px; margin-bottom:18px;">
-            <!-- 1: Gross Inflow -->
-            <div style="background:#f0fdf4; border:1px solid #86efac; border-radius:6px; padding:10px 10px;">
-              <div style="font-size:9px; color:#166534; text-transform:uppercase; font-weight:800; letter-spacing:0.3px;">Gross Bank Settled</div>
-              <div style="font-size:16px; font-weight:900; color:#14532d; margin-top:2px;" id="stmt-sum-gross">₹84,150.00</div>
-              <div style="font-size:8.5px; color:#15803d; margin-top:2px; font-weight:700;">✔ 100% Core Bank Credit</div>
+          <!-- ITEMIZED TRANSACTION AUDIT TABLE -->
+          <div style="margin-bottom:14px;">
+            <div style="font-weight:700; font-size:9.5px; text-transform:uppercase; color:#0f172a; margin-bottom:5px; display:flex; justify-content:space-between;">
+              <span id="stmt-table-count-label">Itemized Settlement Transaction Audit Log (188 Verified Records)</span>
+              <span style="font-size:8.5px; color:#64748b; font-weight:normal;">Currency: Indian Rupee (INR)</span>
             </div>
-
-            <!-- 2: Successful Orders -->
-            <div style="background:#eff6ff; border:1px solid #93c5fd; border-radius:6px; padding:10px 10px;">
-              <div style="font-size:9px; color:#1e40af; text-transform:uppercase; font-weight:800; letter-spacing:0.3px;">Verified Invoices</div>
-              <div style="font-size:16px; font-weight:900; color:#1e3a8a; margin-top:2px;" id="stmt-sum-count">188 Invoices</div>
-              <div style="font-size:8.5px; color:#2563eb; margin-top:2px; font-weight:700;">Unique Retail Buyers</div>
-            </div>
-
-            <!-- 3: Taxable Base Sales -->
-            <div style="background:#fefce8; border:1px solid #fde047; border-radius:6px; padding:10px 10px;">
-              <div style="font-size:9px; color:#854d0e; text-transform:uppercase; font-weight:800; letter-spacing:0.3px;">Taxable Base Turnover</div>
-              <div style="font-size:16px; font-weight:900; color:#713f12; margin-top:2px;" id="stmt-sum-taxable">₹80,142.86</div>
-              <div style="font-size:8.5px; color:#a16207; margin-top:2px; font-weight:700;">Base Net Revenue</div>
-            </div>
-
-            <!-- 4: CGST (2.5%) -->
-            <div style="background:#faf5ff; border:1px solid #d8b4fe; border-radius:6px; padding:10px 10px;">
-              <div style="font-size:9px; color:#6b21a8; text-transform:uppercase; font-weight:800; letter-spacing:0.3px;">CGST (2.5%)</div>
-              <div style="font-size:16px; font-weight:900; color:#581c87; margin-top:2px;" id="stmt-sum-cgst">₹2,003.57</div>
-              <div style="font-size:8.5px; color:#7e22ce; margin-top:2px; font-weight:700;">Central GST Component</div>
-            </div>
-
-            <!-- 5: SGST (2.5%) -->
-            <div style="background:#eef2ff; border:1px solid #c7d2fe; border-radius:6px; padding:10px 10px;">
-              <div style="font-size:9px; color:#3730a3; text-transform:uppercase; font-weight:800; letter-spacing:0.3px;">SGST (2.5%)</div>
-              <div style="font-size:16px; font-weight:900; color:#312e81; margin-top:2px;" id="stmt-sum-sgst">₹2,003.57</div>
-              <div style="font-size:8.5px; color:#4338ca; margin-top:2px; font-weight:700;">State GST Component</div>
-            </div>
-          </div>
-
-          <!-- DAILY RECONCILIATION BREAKDOWN -->
-          <div style="margin-bottom:18px; background:#f8fafc; border:1px solid #e2e8f0; border-radius:6px; padding:12px 14px;">
-            <div style="font-size:10.5px; font-weight:900; color:#0f172a; text-transform:uppercase; margin-bottom:8px; display:flex; justify-content:space-between; align-items:center;">
-              <span>📅 DAILY BANK SETTLEMENT RECONCILIATION (MATCHED TO BANK LEDGER)</span>
-              <span style="font-size:9.5px; color:#059669; font-weight:800;">TOTAL 5% GST: <span id="stmt-sum-tax">₹4,007.14</span></span>
-            </div>
-            <div id="stmt-daily-summary-container" style="display:flex; gap:8px; flex-wrap:wrap;">
-              <!-- Dynamically populated -->
-            </div>
-          </div>
-
-          <!-- ITEMIZED AUDIT TABLE -->
-          <div style="margin-bottom:22px;">
-            <div style="font-size:11px; font-weight:900; color:#0f172a; text-transform:uppercase; margin-bottom:8px; display:flex; justify-content:space-between; align-items:center;">
-              <span>🧾 ITEMIZED TRANSACTION RECONCILIATION AUDIT LEDGER</span>
-              <span style="font-size:10px; color:#475569; font-weight:700;" id="stmt-table-count-label">188 Verified Records</span>
-            </div>
-            <table style="width:100%; border-collapse:collapse; font-size:10px; line-height:1.35; border:1px solid #cbd5e1;">
+            <table style="width:100%; border-collapse:collapse; border:1px solid #cbd5e1;">
               <thead>
-                <tr style="background:#0b192c; color:#ffffff; text-align:left;">
-                  <th style="padding:7px 5px; text-align:center; width:24px; font-weight:800;">#</th>
-                  <th style="padding:7px 6px; width:95px; font-weight:800;">Date &amp; Time</th>
-                  <th style="padding:7px 6px; width:105px; font-weight:800;">Customer Name</th>
-                  <th style="padding:7px 6px; width:110px; font-weight:800;">Customer Mobile</th>
-                  <th style="padding:7px 6px; font-weight:800;">Product (HSN 6109)</th>
-                  <th style="padding:7px 6px; width:95px; font-weight:800;">Bank RRN / UTR</th>
-                  <th style="padding:7px 6px; text-align:right; width:65px; font-weight:800;">Taxable (₹)</th>
-                  <th style="padding:7px 6px; text-align:right; width:52px; font-weight:800;">CGST (₹)</th>
-                  <th style="padding:7px 6px; text-align:right; width:52px; font-weight:800;">SGST (₹)</th>
-                  <th style="padding:7px 6px; text-align:right; width:68px; font-weight:900;">Total (₹)</th>
+                <tr style="background:#0f172a; color:#ffffff; text-align:left;">
+                  <th style="padding:6px 5px; text-align:center; width:26px; font-weight:700; font-size:8.5px; text-transform:uppercase;">#</th>
+                  <th style="padding:6px 6px; width:105px; font-weight:700; font-size:8.5px; text-transform:uppercase;">Date &amp; Time</th>
+                  <th style="padding:6px 6px; width:115px; font-weight:700; font-size:8.5px; text-transform:uppercase;">Customer Name</th>
+                  <th style="padding:6px 6px; width:95px; font-weight:700; font-size:8.5px; text-transform:uppercase;">Mobile No.</th>
+                  <th style="padding:6px 6px; font-weight:700; font-size:8.5px; text-transform:uppercase;">Product (HSN 6109)</th>
+                  <th style="padding:6px 6px; width:95px; font-weight:700; font-size:8.5px; text-transform:uppercase;">Bank RRN / UTR</th>
+                  <th style="padding:6px 6px; text-align:right; width:68px; font-weight:700; font-size:8.5px; text-transform:uppercase;">Taxable</th>
+                  <th style="padding:6px 6px; text-align:right; width:50px; font-weight:700; font-size:8.5px; text-transform:uppercase;">CGST</th>
+                  <th style="padding:6px 6px; text-align:right; width:50px; font-weight:700; font-size:8.5px; text-transform:uppercase;">SGST</th>
+                  <th style="padding:6px 6px; text-align:right; width:72px; font-weight:700; font-size:8.5px; text-transform:uppercase;">Total (₹)</th>
                 </tr>
               </thead>
               <tbody id="stmt-table-body">
@@ -3034,92 +2956,28 @@
             </table>
           </div>
 
-          <!-- STATUTORY AUDIT DECLARATION, STAMP & SIGNATURE BLOCK -->
-          <div style="border-top:2px solid #0f172a; padding-top:16px; margin-top:24px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;">
-            
-            <!-- Legal Declaration Text -->
-            <div style="max-width:440px;">
-              <div style="font-size:10px; font-weight:900; color:#0f172a; margin-bottom:4px; text-transform:uppercase;">
-                STATUTORY COMMERCIAL SETTLEMENT &amp; TAX COMPLIANCE CERTIFICATE:
-              </div>
-              <p style="font-size:9px; color:#475569; text-align:justify; margin:0; line-height:1.45;">
-                This document solemnly certifies authentic commercial consumer sales of knitted readymade apparel (HSN Code 6109) conducted by <strong>StyleXWear Apparel</strong> (Proprietor: Prahlad Kumar Prashant). Every enumerated transaction represents a verified retail purchase duly authorized and settled via One97 Communications / Paytm Payments Bank gateway (MID: <strong>RQEBTF71660866068435</strong>, POS: <strong>PAYTM_POS</strong>) with 100% credit realization into the linked business bank account. Every 12-digit Retrieval Reference Number (RRN) is verified against receiving bank credit logs. Generated for official Banking KYC Verification, Tax Reconciliation, and Commercial Compliance under Rule 46 CGST Act 2017.
-              </p>
-              <div style="margin-top:8px; display:inline-flex; align-items:center; gap:6px; background:#f0fdf4; border:1px solid #86efac; border-radius:4px; padding:3px 8px; font-size:9px; font-weight:800; color:#166534;">
-                <span>✔ 100% RECONCILED WITH CORE BANKING SETTLEMENT RRN</span>
-              </div>
-            </div>
-
-            <!-- Official Seal Stamp (SVG) -->
-            <div style="text-align:center;">
-              <svg width="115" height="115" viewBox="0 0 120 120" style="display:inline-block;">
-                <circle cx="60" cy="60" r="56" fill="none" stroke="#059669" stroke-width="2.5" stroke-dasharray="4,2"/>
-                <circle cx="60" cy="60" r="50" fill="#f0fdf4" stroke="#059669" stroke-width="1.5"/>
-                <defs>
-                  <path id="curve-seal-top" d="M 22,60 A 38,38 0 0,1 98,60" fill="none"/>
-                  <path id="curve-seal-bot" d="M 98,60 A 38,38 0 0,1 22,60" fill="none"/>
-                </defs>
-                <text font-size="7" font-weight="900" fill="#065f46" letter-spacing="1">
-                  <textPath href="#curve-seal-top" startOffset="50%" text-anchor="middle">STYLEXWEAR APPAREL</textPath>
-                </text>
-                <text font-size="6.5" font-weight="900" fill="#047857" letter-spacing="0.5">
-                  <textPath href="#curve-seal-bot" startOffset="50%" text-anchor="middle">★ BANK AUDIT RECONCILED ★</textPath>
-                </text>
-                <g transform="translate(60, 52)">
-                  <circle cx="0" cy="0" r="9" fill="#059669"/>
-                  <path d="M -4,-1 L -1,3 L 5,-4" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
-                </g>
-                <text x="60" y="69" font-size="7" font-weight="900" fill="#065f46" text-anchor="middle">100% VERIFIED</text>
-                <text x="60" y="77" font-size="5.5" font-weight="800" fill="#047857" text-anchor="middle">RULE-46 CGST</text>
-                <text x="60" y="84" font-size="5" fill="#059669" text-anchor="middle">MID: RQEBTF71660866068435</text>
-              </svg>
-            </div>
-
-            <!-- Digital QR & Proprietor Signature -->
-            <div style="text-align:right; min-width:180px;">
-              <div style="margin-bottom:8px;">
-                <!-- QR Code SVG -->
-                <svg width="65" height="65" viewBox="0 0 100 100" style="border:1px solid #cbd5e1; border-radius:4px; padding:2px; background:#fff;">
-                  <rect x="10" y="10" width="24" height="24" fill="#0f172a"/>
-                  <rect x="14" y="14" width="16" height="16" fill="#fff"/>
-                  <rect x="18" y="18" width="8" height="8" fill="#0f172a"/>
-                  <rect x="66" y="10" width="24" height="24" fill="#0f172a"/>
-                  <rect x="70" y="14" width="16" height="16" fill="#fff"/>
-                  <rect x="74" y="18" width="8" height="8" fill="#0f172a"/>
-                  <rect x="10" y="66" width="24" height="24" fill="#0f172a"/>
-                  <rect x="14" y="70" width="16" height="16" fill="#fff"/>
-                  <rect x="18" y="74" width="8" height="8" fill="#0f172a"/>
-                  <rect x="42" y="12" width="6" height="6" fill="#0f172a"/>
-                  <rect x="52" y="12" width="6" height="6" fill="#0f172a"/>
-                  <rect x="42" y="24" width="6" height="6" fill="#0f172a"/>
-                  <rect x="12" y="44" width="6" height="6" fill="#0f172a"/>
-                  <rect x="24" y="44" width="6" height="6" fill="#0f172a"/>
-                  <rect x="36" y="44" width="8" height="8" fill="#0f172a"/>
-                  <rect x="50" y="44" width="6" height="6" fill="#0f172a"/>
-                  <rect x="62" y="44" width="6" height="6" fill="#0f172a"/>
-                  <rect x="76" y="44" width="12" height="6" fill="#0f172a"/>
-                  <rect x="44" y="60" width="6" height="12" fill="#0f172a"/>
-                  <rect x="56" y="60" width="6" height="6" fill="#0f172a"/>
-                  <rect x="68" y="60" width="8" height="8" fill="#0f172a"/>
-                  <rect x="82" y="60" width="6" height="12" fill="#0f172a"/>
-                  <rect x="44" y="78" width="12" height="6" fill="#0f172a"/>
-                  <rect x="62" y="78" width="8" height="8" fill="#0f172a"/>
-                  <rect x="76" y="78" width="12" height="8" fill="#0f172a"/>
-                </svg>
-                <div style="font-size:7.5px; color:#64748b; font-weight:700;">DIGITAL AUDIT VALIDATION</div>
-              </div>
-              <div style="font-family:'Brush Script MT', 'Dancing Script', cursive, 'Segoe Script'; font-size:20px; font-weight:700; color:#1e3a8a; line-height:1; transform:rotate(-2deg); margin-bottom:2px;">
-                Prahlad Kumar Prashant
-              </div>
-              <div style="font-size:11px; font-weight:900; color:#0f172a;">Prahlad Kumar Prashant</div>
-              <div style="font-size:9.5px; font-weight:700; color:#475569;">Proprietor &amp; Authorized Signatory</div>
-              <div style="font-size:8.5px; color:#64748b;">StyleXWear Apparel • MID: RQEBTF71660866068435</div>
-              <div style="font-size:8px; color:#15803d; font-weight:700; margin-top:2px;">(Linked Bank Account Holder)</div>
-            </div>
-
+          <!-- STATUTORY DECLARATION & FORMAL SIGN-OFF -->
+          <div style="border-top:1px solid #cbd5e1; padding-top:10px; margin-top:12px;">
+            <table style="width:100%; border-collapse:collapse;">
+              <tr>
+                <td style="vertical-align:top; width:65%; font-size:8.5px; color:#475569; line-height:1.45;">
+                  <strong>DECLARATION &amp; STATUTORY COMPLIANCE NOTE:</strong><br>
+                  This official commercial statement certifies bona fide consumer retail sales of knitted cotton apparel (HSN Code 6109) conducted by <strong>StyleXWear Apparel</strong> (Proprietor: Prahlad Kumar Prashant). Every transaction listed corresponds to a genuine authorized purchase processed through Paytm for Business gateway (MID: <strong>RQEBTF71660866068435</strong>, POS: <strong>PAYTM_POS</strong>) and settled into our linked bank account against the listed 12-digit Banking Retrieval Reference Numbers (RRN). There are zero chargebacks and zero pending disputes. Issued for official Banking Verification and Tax Audit Compliance under Rule 46 of the CGST Act, 2017.
+                  <div style="margin-top:4px; color:#15803d; font-weight:700;">
+                    ✔ 100% RECONCILED WITH CORE BANKING SETTLEMENT RRN LOGS
+                  </div>
+                </td>
+                <td style="vertical-align:top; text-align:right; width:35%;">
+                  <div style="font-size:9px; color:#64748b; margin-bottom:28px;">For <strong>StyleXWear Apparel</strong></div>
+                  <div style="font-size:11px; font-weight:800; color:#0f172a;">Prahlad Kumar Prashant</div>
+                  <div style="font-size:9px; color:#475569;">Proprietor &amp; Authorized Signatory</div>
+                  <div style="font-size:8px; color:#64748b;">(Bank Account Holder • Paytm Merchant)</div>
+                </td>
+              </tr>
+            </table>
           </div>
 
-        </div>
+        </div></div>
       </div>
     </div>
   </div>
