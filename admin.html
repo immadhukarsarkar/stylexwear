@@ -2472,7 +2472,7 @@
 
         return {
           idx: idx + 1,
-          date: o.date || '',
+          date: (function(d){ if(!d) return ''; const dp = d.slice(0,10).split('-'); const m=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']; return dp[2] + ' ' + (m[parseInt(dp[1],10)-1]||dp[1]) + ' ' + dp[0]; })(o.date),
           orderId: o.orderId || '',
           custName: cust.name,
           custPhone: cust.phone,
@@ -2936,7 +2936,7 @@
               <thead>
                 <tr style="background:#0f172a; color:#ffffff; text-align:left;">
                   <th style="padding:6px 5px; text-align:center; width:26px; font-weight:700; font-size:8.5px; text-transform:uppercase;">#</th>
-                  <th style="padding:6px 6px; width:105px; font-weight:700; font-size:8.5px; text-transform:uppercase;">Date &amp; Time</th>
+                  <th style="padding:6px 6px; width:80px; font-weight:700; font-size:8.5px; text-transform:uppercase;">Date</th>
                   <th style="padding:6px 6px; width:115px; font-weight:700; font-size:8.5px; text-transform:uppercase;">Customer Name</th>
                   <th style="padding:6px 6px; width:95px; font-weight:700; font-size:8.5px; text-transform:uppercase;">Mobile No.</th>
                   <th style="padding:6px 6px; font-weight:700; font-size:8.5px; text-transform:uppercase;">Product (HSN 6109)</th>
