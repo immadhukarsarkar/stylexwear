@@ -1515,13 +1515,32 @@
         }
       } catch(e) {}
 
-      // Merge with local orders fallback
-      const localOrders = JSON.parse(localStorage.getItem('StyleXWear_orders') || '[]');
-      const orderMap = new Map();
-      orders.forEach(o => { if (o && o.orderId) orderMap.set(o.orderId, o); });
-      localOrders.forEach(o => { if (o && o.orderId && !orderMap.has(o.orderId)) orderMap.set(o.orderId, o); });
-      orders = Array.from(orderMap.values());
-      try { localStorage.setItem('StyleXWear_orders', JSON.stringify(orders)); } catch(e) {}
+      // Authoritative sync & deduplication
+      if (orders.length > 0) {
+        const seenKeys = new Set();
+        orders = orders.filter(o => {
+          if (!o || !o.orderId) return false;
+          // Filter out legacy manual test orders
+          if (o.orderId === 'SXW-PAYTM-971201') return false;
+          const dedupKey = o.rrn || o.paytmTxnId || o.orderId;
+          if (seenKeys.has(dedupKey)) return false;
+          seenKeys.add(dedupKey);
+          return true;
+        });
+        try { localStorage.setItem('StyleXWear_orders', JSON.stringify(orders)); } catch(e) {}
+      } else {
+        // Fallback to local only if network fails
+        const local = JSON.parse(localStorage.getItem('StyleXWear_orders') || '[]');
+        const seenKeys = new Set();
+        orders = local.filter(o => {
+          if (!o || !o.orderId) return false;
+          if (o.orderId === 'SXW-PAYTM-971201') return false;
+          const dedupKey = o.rrn || o.paytmTxnId || o.orderId;
+          if (seenKeys.has(dedupKey)) return false;
+          seenKeys.add(dedupKey);
+          return true;
+        });
+      }
 
       const tbody = document.getElementById('admin-orders-table-body');
       tbody.innerHTML = '';
