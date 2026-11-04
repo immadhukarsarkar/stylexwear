@@ -3,7 +3,7 @@
  * ------------------------------------------------------------- */
 
 // Global locale-independent price formatting helper
-const formatPrice = (val) => {
+var formatPrice = window.formatPrice = window.formatPrice || function(val) {
   const num = typeof val === 'string' ? parseFloat(val.replace(/[^0-9.]/g, '')) : val;
   if (isNaN(num)) return '0';
   return Math.round(num).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -117,6 +117,75 @@ function initCollectionSortDropdown() {
   });
 }
 
+function renderBatch() {
+  const grid = document.getElementById('collection-grid');
+  const counterEl = document.getElementById('results-counter');
+  const loadMoreContainer = document.getElementById('load-more-container');
+  if (!grid) return;
+
+  const nextBatch = filteredProducts.slice(displayedCount, displayedCount + productsPerPage);
+  if (nextBatch.length === 0) {
+    if (displayedCount === 0) {
+      grid.innerHTML = '<div class="coll-empty-state"><i data-feather="package" style="width:40px;height:40px;"></i><span>No products found in this collection.</span></div>';
+      if (typeof feather !== 'undefined') feather.replace();
+    }
+    return;
+  }
+  nextBatch.forEach((prod, index) => {
+    const card = document.createElement('div');
+    card.className = 'coll-product-card';
+    card.style.transitionDelay = `${(index % 8) * 0.06}s`;
+    
+    const img1 = (prod.images && prod.images[0]) || '';
+    const img2 = (prod.images && prod.images[1]) || img1;
+    
+    // Pick swatches based on product index
+    const swatchSet = SWATCH_PALETTES[(filteredProducts.indexOf(prod)) % SWATCH_PALETTES.length] || ['s-black'];
+    const swatchesHTML = swatchSet.map(cls => `<span class="coll-swatch ${cls}" title="${cls.replace('s-','')}"></span>`).join('');
+    
+    const sizes = ['S', 'M', 'L', 'XL', '2XL'];
+    const sizesHTML = sizes.map(s => `<button class="coll-size-chip" data-size="${s}" data-id="${prod.id}">${s}</button>`).join('');
+    
+    const isWishlisted = typeof getWishlist === 'function' && getWishlist().includes(prod.handle);
+    
+    card.innerHTML = `
+      <div class="coll-card-img-wrap">
+        <img class="img-primary" src="${img1}" alt="${prod.title}" loading="lazy">
+        ${img2 !== img1 ? `<img class="img-secondary" src="${img2}" alt="${prod.title} alternate" loading="lazy">` : ''}
+        
+        <button class="coll-wishlist-btn ${isWishlisted ? 'active' : ''}" data-handle="${prod.handle}" aria-label="Wishlist">
+          <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </button>
+        
+        <button class="coll-quick-add-strip" data-id="${prod.id}">Quick Add +</button>
+        <a href="product.html?product=${prod.handle}" class="coll-card-link-overlay" aria-label="View ${prod.title}"></a>
+      </div>
+      
+      <div class="coll-card-info">
+        <div class="coll-card-title">
+          <a href="product.html?product=${prod.handle}">${prod.title}</a>
+        </div>
+        <div class="coll-card-price">${prod.price}</div>
+        <div class="coll-card-swatches">${swatchesHTML}</div>
+        <div class="coll-card-sizes">${sizesHTML}</div>
+      </div>
+    `;
+    
+    grid.appendChild(card);
+    requestAnimationFrame(() => requestAnimationFrame(() => card.classList.add('visible')));
+  });
+  
+  displayedCount += nextBatch.length;
+  if (counterEl) counterEl.textContent = `${filteredProducts.length} products`;
+  
+  if (loadMoreContainer) {
+    loadMoreContainer.style.display = displayedCount < filteredProducts.length ? 'flex' : 'none';
+  }
+  
+  if (typeof feather !== 'undefined') feather.replace();
+  if (typeof wireProductCardActions === 'function') wireProductCardActions();
+}
+
 function applySortAndRender() {
   if (activeSortKey === 'price-low') {
     filteredProducts.sort((a, b) => (parseFloat(a.price.replace(/[^0-9.]/g, '')) || 0) - (parseFloat(b.price.replace(/[^0-9.]/g, '')) || 0));
@@ -185,69 +254,8 @@ function initCollectionPage() {
   
   // 3. Initial sort (default featured)
   
-  // 4. Render product batch using new premium card design
-  const renderBatch = () => {
-    const nextBatch = filteredProducts.slice(displayedCount, displayedCount + productsPerPage);
-    if (nextBatch.length === 0) {
-      if (displayedCount === 0) {
-        grid.innerHTML = '<div class="coll-empty-state"><i data-feather="package" style="width:40px;height:40px;"></i><span>No products found in this collection.</span></div>';
-        feather.replace();
-      }
-      return;
-    }
-    nextBatch.forEach((prod, index) => {
-      const card = document.createElement('div');
-      card.className = 'coll-product-card';
-      card.style.transitionDelay = `${(index % 8) * 0.06}s`;
-      
-      const img1 = prod.images[0] || '';
-      const img2 = prod.images[1] || img1;
-      
-      // Pick swatches based on product index
-      const swatchSet = SWATCH_PALETTES[(filteredProducts.indexOf(prod)) % SWATCH_PALETTES.length];
-      const swatchesHTML = swatchSet.map(cls => `<span class="coll-swatch ${cls}" title="${cls.replace('s-','')}"></span>`).join('');
-      
-      const sizes = ['S', 'M', 'L', 'XL', '2XL'];
-      const sizesHTML = sizes.map(s => `<button class="coll-size-chip" data-size="${s}" data-id="${prod.id}">${s}</button>`).join('');
-      
-      const isWishlisted = getWishlist().includes(prod.handle);
-      
-      card.innerHTML = `
-        <div class="coll-card-img-wrap">
-          <img class="img-primary" src="${img1}" alt="${prod.title}" loading="lazy">
-          ${img2 !== img1 ? `<img class="img-secondary" src="${img2}" alt="${prod.title} alternate" loading="lazy">` : ''}
-          
-          <button class="coll-wishlist-btn ${isWishlisted ? 'active' : ''}" data-handle="${prod.handle}" aria-label="Wishlist">
-            <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-          </button>
-          
-          <button class="coll-quick-add-strip" data-id="${prod.id}">Quick Add +</button>
-          <a href="product.html?product=${prod.handle}" class="coll-card-link-overlay" aria-label="View ${prod.title}"></a>
-        </div>
-        
-        <div class="coll-card-info">
-          <div class="coll-card-title">
-            <a href="product.html?product=${prod.handle}">${prod.title}</a>
-          </div>
-          <div class="coll-card-price">${prod.price}</div>
-          <div class="coll-card-swatches">${swatchesHTML}</div>
-          <div class="coll-card-sizes">${sizesHTML}</div>
-        </div>
-      `;
-      
-      grid.appendChild(card);
-      // Staggered fade-in
-      requestAnimationFrame(() => requestAnimationFrame(() => card.classList.add('visible')));
-    });
-    
-    displayedCount += nextBatch.length;
-    if (counterEl) counterEl.textContent = `${filteredProducts.length} products`;
-    
-    loadMoreContainer.style.display = displayedCount < filteredProducts.length ? 'flex' : 'none';
-    
-    feather.replace();
-    wireProductCardActions();
-  };
+  // 4. Products rendered via global renderBatch()
+
   
   // Initial draw cycle
   applySortAndRender();
